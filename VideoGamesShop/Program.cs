@@ -1,7 +1,7 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using VideoGamesShop.Core.Constants;
-using VideoGamesShop.Data;
+using VideoGamesShop.Infrastructure.Data;
 using VideoGamesShop.ModelBinders;
 
 var builder = WebApplication.CreateBuilder(args);

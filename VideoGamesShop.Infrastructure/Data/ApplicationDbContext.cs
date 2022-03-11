@@ -2,7 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using VideoGamesShop.Data.Models;
 
-namespace VideoGamesShop.Data
+namespace VideoGamesShop.Infrastructure.Data
 {
     public class ApplicationDbContext : IdentityDbContext
     {
