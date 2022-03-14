@@ -1,251 +1,326 @@
-﻿<!DOCTYPE html>
+﻿
+<!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <title>@ViewData["Title"]</title>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Mukta:300,400,700">
-    <link rel="stylesheet" href="~/fonts/icomoon/style.css">
+    <title>Dashboard - NiceAdmin Bootstrap Template</title>
+    <meta content="" name="description">
+    <meta content="" name="keywords">
 
-    <link rel="stylesheet" href="~/css/bootstrap.min.css">
-    <link rel="stylesheet" href="~/css/magnific-popup.css">
-    <link rel="stylesheet" href="~/css/jquery-ui.css">
-    <link rel="stylesheet" href="~/css/owl.carousel.min.css">
-    <link rel="stylesheet" href="~/css/owl.theme.default.min.css">
+    <!-- Favicons -->
+    <link href="~/assets/img/favicon.png" rel="icon">
+    <link href="~/assets/img/apple-touch-icon.png" rel="apple-touch-icon">
 
-    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <!-- Google Fonts -->
+    <link href="https://fonts.gstatic.com" rel="preconnect">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
 
-    <link rel="stylesheet" href="~/css/aos.css">
+    <!-- Vendor CSS Files -->
+    <link href="~/assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="~/assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+    <link href="~/assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
+    <link href="~/assets/vendor/quill/quill.snow.css" rel="stylesheet">
+    <link href="~/assets/vendor/quill/quill.bubble.css" rel="stylesheet">
+    <link href="~/assets/vendor/remixicon/remixicon.css" rel="stylesheet">
+    <link href="~/assets/vendor/simple-datatables/style.css" rel="stylesheet">
 
-    <link rel="stylesheet" href="~/css/style.css">
-    @await RenderSectionAsync("Head", false);
+    <!-- Template Main CSS File -->
+    <link href="~/assets/css/style.css" rel="stylesheet">
+
+    <!-- =======================================================
+    * Template Name: NiceAdmin - v2.2.2
+    * Template URL: https://bootstrapmade.com/nice-admin-bootstrap-admin-html-template/
+    * Author: BootstrapMade.com
+    * License: https://bootstrapmade.com/license/
+    ======================================================== -->
 </head>
+
 <body>
+    @RenderBody()
+    <!-- ======= Header ======= -->
+    <header id="header" class="header fixed-top d-flex align-items-center">
 
-    <div class="site-wrap">
-        <header class="site-navbar" role="banner">
-            @RenderBody();
-            <div class="site-navbar-top">
-                <div class="container">
-                    <div class="row align-items-center">
+        <div class="d-flex align-items-center justify-content-between">
+            <a href="\" class="logo d-flex align-items-center">
+                <img src="~/assets/img/logo.png" alt="">
+                <span class="d-none d-lg-block">GameShop</span>
+            </a>
+            <i class="bi bi-list toggle-sidebar-btn"></i>
+        </div><!-- End Logo -->
 
-                        <div class="col-6 col-md-4 order-2 order-md-1 site-search-icon text-left">
-                            <form action="" class="site-block-top-search">
-                                <span class="icon icon-search2"></span>
-                                <input type="text" class="form-control border-0" placeholder="Search">
+        <div class="search-bar">
+            <form class="search-form d-flex align-items-center" method="POST" action="#">
+                <input type="text" name="query" placeholder="Search" title="Enter search keyword">
+                <button type="submit" title="Search"><i class="bi bi-search"></i></button>
+            </form>
+        </div><!-- End Search Bar -->
+
+        <nav class="header-nav ms-auto">
+            <ul class="d-flex align-items-center">
+
+                <li class="nav-item d-block d-lg-none">
+                    <a class="nav-link nav-icon search-bar-toggle " href="#">
+                        <i class="bi bi-search"></i>
+                    </a>
+                </li><!-- End Search Icon-->
+
+                <li class="nav-item dropdown">
+
+                    <a class="nav-link nav-icon" href="#" data-bs-toggle="dropdown">
+                        <i class="bi bi-bell"></i>
+                        <span class="badge bg-primary badge-number">4</span>
+                    </a><!-- End Notification Icon -->
+
+                    <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow notifications">
+                        <li class="dropdown-header">
+                            You have 4 new notifications
+                            <a href="#"><span class="badge rounded-pill bg-primary p-2 ms-2">View all</span></a>
+                        </li>
+                        <li>
+                            <hr class="dropdown-divider">
+                        </li>
+
+                        <li class="notification-item">
+                            <i class="bi bi-exclamation-circle text-warning"></i>
+                            <div>
+                                <h4>Lorem Ipsum</h4>
+                                <p>Quae dolorem earum veritatis oditseno</p>
+                                <p>30 min. ago</p>
+                            </div>
+                        </li>
+
+                        <li>
+                            <hr class="dropdown-divider">
+                        </li>
+
+                        <li class="notification-item">
+                            <i class="bi bi-x-circle text-danger"></i>
+                            <div>
+                                <h4>Atque rerum nesciunt</h4>
+                                <p>Quae dolorem earum veritatis oditseno</p>
+                                <p>1 hr. ago</p>
+                            </div>
+                        </li>
+
+                        <li>
+                            <hr class="dropdown-divider">
+                        </li>
+
+                        <li class="notification-item">
+                            <i class="bi bi-check-circle text-success"></i>
+                            <div>
+                                <h4>Sit rerum fuga</h4>
+                                <p>Quae dolorem earum veritatis oditseno</p>
+                                <p>2 hrs. ago</p>
+                            </div>
+                        </li>
+
+                        <li>
+                            <hr class="dropdown-divider">
+                        </li>
+
+                        <li class="notification-item">
+                            <i class="bi bi-info-circle text-primary"></i>
+                            <div>
+                                <h4>Dicta reprehenderit</h4>
+                                <p>Quae dolorem earum veritatis oditseno</p>
+                                <p>4 hrs. ago</p>
+                            </div>
+                        </li>
+
+                        <li>
+                            <hr class="dropdown-divider">
+                        </li>
+                        <li class="dropdown-footer">
+                            <a href="#">Show all notifications</a>
+                        </li>
+
+                    </ul><!-- End Notification Dropdown Items -->
+
+                </li><!-- End Notification Nav -->
+
+                <li class="nav-item dropdown">
+
+                    <a class="nav-link nav-icon" href="#" data-bs-toggle="dropdown">
+                        <i class="bi bi-chat-left-text"></i>
+                        <span class="badge bg-success badge-number">3</span>
+                    </a><!-- End Messages Icon -->
+
+                    <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow messages">
+                        <li class="dropdown-header">
+                            You have 3 new messages
+                            <a href="#"><span class="badge rounded-pill bg-primary p-2 ms-2">View all</span></a>
+                        </li>
+                        <li>
+                            <hr class="dropdown-divider">
+                        </li>
+
+                        <li class="message-item">
+                            <a href="#">
+                                <img src="~/assets/img/messages-1.jpg" alt="" class="rounded-circle">
+                                <div>
+                                    <h4>Maria Hudson</h4>
+                                    <p>Velit asperiores et ducimus soluta repudiandae labore officia est ut...</p>
+                                    <p>4 hrs. ago</p>
+                                </div>
+                            </a>
+                        </li>
+                        <li>
+                            <hr class="dropdown-divider">
+                        </li>
+
+                        <li class="message-item">
+                            <a href="#">
+                                <img src="~/assets/img/messages-2.jpg" alt="" class="rounded-circle">
+                                <div>
+                                    <h4>Anna Nelson</h4>
+                                    <p>Velit asperiores et ducimus soluta repudiandae labore officia est ut...</p>
+                                    <p>6 hrs. ago</p>
+                                </div>
+                            </a>
+                        </li>
+                        <li>
+                            <hr class="dropdown-divider">
+                        </li>
+
+                        <li class="message-item">
+                            <a href="#">
+                                <img src="~/assets/img/messages-3.jpg" alt="" class="rounded-circle">
+                                <div>
+                                    <h4>David Muldon</h4>
+                                    <p>Velit asperiores et ducimus soluta repudiandae labore officia est ut...</p>
+                                    <p>8 hrs. ago</p>
+                                </div>
+                            </a>
+                        </li>
+                        <li>
+                            <hr class="dropdown-divider">
+                        </li>
+
+                        <li class="dropdown-footer">
+                            <a href="#">Show all messages</a>
+                        </li>
+
+                    </ul><!-- End Messages Dropdown Items -->
+
+                </li><!-- End Messages Nav -->
+
+                <li class="nav-item dropdown pe-3">
+
+                    <partial name="_LoginPartial" />
+
+                    <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile">
+                        <li class="dropdown-header">
+                            <h6>Kevin Anderson</h6>
+                            <span>Web Designer</span>
+                        </li>
+                        <li>
+                            <hr class="dropdown-divider">
+                        </li>
+
+                        <li>
+                            <a class="dropdown-item d-flex align-items-center" href="users-profile.html">
+                                <i class="bi bi-person"></i>
+                                <span>My Profile</span>
+                            </a>
+                        </li>
+                        <li>
+                            <hr class="dropdown-divider">
+                        </li>
+
+                        <li>
+                            <a class="dropdown-item d-flex align-items-center" href="users-profile.html">
+                                <i class="bi bi-gear"></i>
+                                <span>Account Settings</span>
+                            </a>
+                        </li>
+                        <li>
+                            <hr class="dropdown-divider">
+                        </li>
+
+                        <li>
+                            <a class="dropdown-item d-flex align-items-center" href="pages-faq.html">
+                                <i class="bi bi-question-circle"></i>
+                                <span>Need Help?</span>
+                            </a>
+                        </li>
+                        <li>
+                            <hr class="dropdown-divider">
+                        </li>
+
+                        <li>
+                            @*<a class="dropdown-item d-flex align-items-center" href="\identity\account\logout">
+                                <i class="bi bi-box-arrow-right"></i>
+                                <span>Sign Out</span>*@
+
+                            <form class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Page("/", new { area = "" })" method="post">
+                                <i class="bi bi-box-arrow-right"></i>
+                               <button type="submit" class="dropdown-item d-flex">Sign Out</button>
                             </form>
-                        </div>
-
-                        <div class="col-12 mb-3 mb-md-0 col-md-4 order-1 order-md-2 text-center">
-                            <div class="site-logo">
-                                <a href="index.html" class="js-logo-clone">VideoGamesShop</a>
-                            </div>
-                        </div>
-
-                        <div class="col-6 col-md-4 order-3 order-md-3 text-right">
-                            <div class="site-top-icons">
-                                <ul>
-                                    <li><a href="#"><span class="icon icon-person"></span></a></li>
-                                    <li><a href="#"><span class="icon icon-heart-o"></span></a></li>
-                                    <li>
-                                        <a href="cart.html" class="site-cart">
-                                            <span class="icon icon-shopping_cart"></span>
-                                            <span class="count">2</span>
-                                        </a>
-                                    </li>
-                                    <li class="d-inline-block d-md-none ml-md-0"><a href="#" class="site-menu-toggle js-menu-toggle"><span class="icon-menu"></span></a></li>
-                                </ul>
-                            </div>
-                        </div>
-
-                    </div>
-                </div>
-            </div>
-            <nav class="site-navigation text-right text-md-center" role="navigation">
-                <div class="container">
-                    <ul class="site-menu js-clone-nav d-none d-md-block">
-                        <li class="has-children active">
-                            <a href="index.html">Home</a>
-                            <ul class="dropdown">
-                                <li><a href="#">Menu One</a></li>
-                                <li><a href="#">Menu Two</a></li>
-                                <li><a href="#">Menu Three</a></li>
-                                <li class="has-children">
-                                    <a href="#">Sub Menu</a>
-                                    <ul class="dropdown">
-                                        <li><a href="#">Menu One</a></li>
-                                        <li><a href="#">Menu Two</a></li>
-                                        <li><a href="#">Menu Three</a></li>
-                                    </ul>
-                                </li>
-                            </ul>
                         </li>
-                        <li class="has-children">
-                            <a href="about.html">About</a>
-                            <ul class="dropdown">
-                                <li><a href="#">Menu One</a></li>
-                                <li><a href="#">Menu Two</a></li>
-                                <li><a href="#">Menu Three</a></li>
-                            </ul>
-                        </li>
-                        <li><a href="shop.html">Shop</a></li>
-                        <li><a href="#">Catalogue</a></li>
-                        <li><a href="#">New Arrivals</a></li>
-                        <li><a href="contact.html">Contact</a></li>
-                    </ul>
-                </div>
-            </nav>
-        </header>
 
-        <div class="site-blocks-cover" style="background-image: url(images/HomeImage.jpg);" data-aos="fade">
-            <div class="container">
-                <div class="row align-items-start align-items-md-center justify-content-end">
-                    <div class="col-md-5 text-center text-md-left pt-5 pt-md-0">
-                        <h1 class="mb-2">FROM GAMERS TO GAMERS</h1>
-                        <div class="intro-text text-center text-md-left">
-                            <p class="mb-4"> #1 Online game store in the world. </p>
-                            <p>
-                                <a href="#" class="btn btn-sm btn-primary">GO TO STORE</a>
-                            </p>
-                        </div>
-                    </div>
-                </div>
+                    </ul><!-- End Profile Dropdown Items -->
+                </li><!-- End Profile Nav -->
+
+            </ul>
+        </nav><!-- End Icons Navigation -->
+
+    </header><!-- End Header -->
+    <!-- ======= Sidebar ======= -->
+    <aside id="sidebar" class="sidebar">
+
+        <ul class="sidebar-nav" id="sidebar-nav">
+
+            <li class="nav-item">
+                <a class="nav-link " href="/">
+                    <i class="bi bi-house-fill"></i>
+                    <span>Home</span>
+                </a>
+            </li>
+
+            <li class="nav-item">
+                <a class="nav-link " href="/">
+                    <i class="bi bi-controller"></i>
+                    <span>My Games</span>
+                </a>
+            </li>
+
+
+        </ul>
+        <!-- End Dashboard Nav -->
+        </main><!-- End #main -->
+        <!-- ======= Footer ======= -->
+        <footer id="footer" class="footer">
+            <div class="copyright">
+                &copy; Copyright <strong><span>NiceAdmin</span></strong>. All Rights Reserved
             </div>
-        </div>
-
-
-
-        <div class="site-section block-3 site-blocks-2 bg-light">
-            <div class="container">
-                <div class="row justify-content-center">
-                    <div class="col-md-7 site-section-heading text-center pt-4">
-                        <h2>Featured Games</h2>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-12">
-                        <div class="nonloop-block-3 owl-carousel">
-                            <div class="item">
-                                <div class="block-4 text-center">
-                                    <figure class="block-4-image">
-                                        <img src="~/images/cloth_1.jpg" alt="Image placeholder" class="img-fluid">
-                                    </figure>
-                                    <div class="block-4-text p-4">
-                                        <h3><a href="#">Tank Top</a></h3>
-                                        <p class="mb-0">Finding perfect t-shirt</p>
-                                        <p class="text-primary font-weight-bold">$50</p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="item">
-                                <div class="block-4 text-center">
-                                    <figure class="block-4-image">
-                                        <img src="~/images/shoe_1.jpg" alt="Image placeholder" class="img-fluid">
-                                    </figure>
-                                    <div class="block-4-text p-4">
-                                        <h3><a href="#">Corater</a></h3>
-                                        <p class="mb-0">Finding perfect products</p>
-                                        <p class="text-primary font-weight-bold">$50</p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="item">
-                                <div class="block-4 text-center">
-                                    <figure class="block-4-image">
-                                        <img src="~/images/cloth_2.jpg" alt="Image placeholder" class="img-fluid">
-                                    </figure>
-                                    <div class="block-4-text p-4">
-                                        <h3><a href="#">Polo Shirt</a></h3>
-                                        <p class="mb-0">Finding perfect products</p>
-                                        <p class="text-primary font-weight-bold">$50</p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="item">
-                                <div class="block-4 text-center">
-                                    <figure class="block-4-image">
-                                        <img src="~/images/cloth_3.jpg" alt="Image placeholder" class="img-fluid">
-                                    </figure>
-                                    <div class="block-4-text p-4">
-                                        <h3><a href="#">T-Shirt Mockup</a></h3>
-                                        <p class="mb-0">Finding perfect products</p>
-                                        <p class="text-primary font-weight-bold">$50</p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="item">
-                                <div class="block-4 text-center">
-                                    <figure class="block-4-image">
-                                        <img src="~/images/shoe_1.jpg" alt="Image placeholder" class="img-fluid">
-                                    </figure>
-                                    <div class="block-4-text p-4">
-                                        <h3><a href="#">Corater</a></h3>
-                                        <p class="mb-0">Finding perfect products</p>
-                                        <p class="text-primary font-weight-bold">$50</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+            <div class="credits">
+                <!-- All the links in the footer should remain intact. -->
+                <!-- You can delete the links only if you purchased the pro version. -->
+                <!-- Licensing information: https://bootstrapmade.com/license/ -->
+                <!-- Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/nice-admin-bootstrap-admin-html-template/ -->
+                Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
             </div>
-        </div>
+        </footer><!-- End Footer -->
+        <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
 
+        <!-- Vendor JS Files -->
+        <script src="~/assets/vendor/apexcharts/apexcharts.min.js"></script>
+        <script src="~/assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+        <script src="~/assets/vendor/chart.js/chart.min.js"></script>
+        <script src="~/assets/vendor/echarts/echarts.min.js"></script>
+        <script src="~/assets/vendor/quill/quill.min.js"></script>
+        <script src="~/assets/vendor/simple-datatables/simple-datatables.js"></script>
+        <script src="~/assets/vendor/tinymce/tinymce.min.js"></script>
+        <script src="~/assets/vendor/php-email-form/validate.js"></script>
 
-        <footer class="site-footer border-top">
-            <div class="container">
-                <div class="row">
-                    <div class="col-lg-6 mb-5 mb-lg-0">
-                        <div class="row">
-                            <div class="col-md-12">
-                                <h3 class="footer-heading mb-4">Navigations</h3>
-                            </div>
-                            <div class="col-md-6 col-lg-4">
-                                <ul class="list-unstyled">
-                                    <li><a href="#">Wishlist</a></li>
-                                    <li><a href="#">Shopping cart</a></li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-6 col-lg-3">
-                        <div class="block-5 mb-5">
-                            <h3 class="footer-heading mb-4">Contact Info</h3>
-                            <ul class="list-unstyled">
-                                <li class="address">Mall Paradise, Sofia, Bulgaria</li>
-                                <li class="phone"><a href="tel://23923929210">+2 392 3929 210</a></li>
-                                <li class="email">VideoGamesShop@gmail.com</li>
-                            </ul>
-                        </div>
-
-                        
-                    </div>
-                </div>
-                <div class="row pt-5 mt-5 text-center">
-                    <div class="col-md-12">
-                        <p>
-                            <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-                            Copyright &copy;<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="icon-heart" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank" class="text-primary">Colorlib</a>
-                            <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-                        </p>
-                    </div>
-
-                </div>
-            </div>
-        </footer>
-    </div>
-
-    <script src="~/js/jquery-3.3.1.min.js"></script>
-    <script src="~/js/jquery-ui.js"></script>
-    <script src="~/js/popper.min.js"></script>
-    <script src="~/js/bootstrap.min.js"></script>
-    <script src="~/js/owl.carousel.min.js"></script>
-    <script src="~/js/jquery.magnific-popup.min.js"></script>
-    <script src="~/js/aos.js"></script>
-
-    <script src="~/js/main.js"></script>
-    @await RenderSectionAsync("Scripts", false);
+        <!-- Template Main JS File -->
+        <script src="~/assets/js/main.js"></script>
+        @await RenderSectionAsync("Scripts", required: false)
 
 </body>
+
 </html>
