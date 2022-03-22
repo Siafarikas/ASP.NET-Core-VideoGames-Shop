@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Logging;
-using VideoGamesShop.Data.Models;
+using VideoGamesShop.Infrastructure.Data.Models;
 
 namespace VideoGamesShop.Areas.Identity.Pages.Account.Manage
 {
