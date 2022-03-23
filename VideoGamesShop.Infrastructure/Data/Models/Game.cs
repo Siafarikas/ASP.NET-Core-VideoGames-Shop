@@ -2,19 +2,21 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace VideoGamesShop.Data.Models
+namespace VideoGamesShop.Infrastructure.Data.Models
 {
     using static DataConstants;
     public class Game
     {
         [Key]
-        public int Id { get; set; }
+        public Guid Id { get; set; } = Guid.NewGuid();
+
 
         [Required]
-        [MaxLength(GameTitleMaxLength)]
+        [MinLength(GameTitleMinLength), MaxLength(GameTitleMaxLength)]
         public string Title { get; set; }
 
         [Required]
+        [DataType("money")]
         public decimal Price { get; set; }
 
         [Required]
@@ -29,15 +31,23 @@ namespace VideoGamesShop.Data.Models
         [MaxLength(250)]
         public string ImageUrl { get; set; }
 
+
+
         public int DeveloperId { get; set; }
 
-        [Required]
         [ForeignKey(nameof(DeveloperId))]
         public Developer Developer { get; set; }
 
-        public IEnumerable<Genre> Genres { get; set; }
 
-        public IEnumerable<Tag> Tags { get; set; }
+
+        public Guid GenreId { get; set; } = Guid.NewGuid();
+
+        [ForeignKey(nameof(GenreId))]
+        public Genre Genre { get; set; }
+
+
+
+        public IList<Tag> Tags { get; set; } = new List<Tag>();
 
     }
 }

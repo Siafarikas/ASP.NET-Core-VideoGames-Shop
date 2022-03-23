@@ -1,11 +1,11 @@
-﻿namespace VideoGamesShop.Data.Models
+﻿namespace VideoGamesShop.Infrastructure.Data.Models
 {
     public class Developer
     {
         public int Id { get; set; }
 
-        public string StudioName { get; set; }
+        public string Title { get; set; }
 
-        public IEnumerable<Game> Games { get; set; } = Enumerable.Empty<Game>();
+        public IList<Game> Games { get; set; } = new List<Game>();
     }
 }
