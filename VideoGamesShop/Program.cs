@@ -1,5 +1,7 @@
 using Microsoft.AspNetCore.Identity;
 using VideoGamesShop.Core.Constants;
+using VideoGamesShop.Core.Contracts;
+using VideoGamesShop.Core.Services;
 using VideoGamesShop.Infrastructure.Data;
 using VideoGamesShop.Infrastructure.Data.Identity;
 using VideoGamesShop.ModelBinders;
@@ -24,6 +26,9 @@ builder.Services.AddControllersWithViews()
         options.ModelBinderProviders.Insert(1, new DateTimeModelBinderProvider(FormattingConstant.NormalDateFormat));
         options.ModelBinderProviders.Insert(2, new DoubleModelBinderProvider());
     });
+
+
+builder.Services.AddApplicationServices();
 
 var app = builder.Build();
 
