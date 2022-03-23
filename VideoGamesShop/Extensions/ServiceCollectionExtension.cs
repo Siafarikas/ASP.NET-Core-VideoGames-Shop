@@ -1,10 +1,18 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using VideoGamesShop.Infrastructure.Data;
+using VideoGamesShop.Infrastructure.Data.Repositories;
 
 namespace Microsoft.Extensions.DependencyInjection
 {
     public static class ServiceCollectionExtension
     {
+        public static IServiceCollection AddApplicationServices(this IServiceCollection services)
+        {
+            services.AddScoped<IApplicatioDbRepo, ApplicatioDbRepo>();
+
+            return services;
+        }
+
         public static IServiceCollection AddApplicationDbContext(this IServiceCollection services, IConfiguration config)
         {
             var connectionString = config.GetConnectionString("DefaultConnection");
