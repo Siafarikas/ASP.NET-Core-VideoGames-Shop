@@ -3,11 +3,13 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.0.32014.148
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VideoGamesShop", "VideoGamesShop\VideoGamesShop.csproj", "{848EDD76-8BDF-4AD3-BF1A-B7A883989B23}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VideoGamesShop", "VideoGamesShop\VideoGamesShop.csproj", "{848EDD76-8BDF-4AD3-BF1A-B7A883989B23}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VideoGamesShop.Core", "VideoGamesShop.Core\VideoGamesShop.Core.csproj", "{B425F281-616B-4046-B4A8-00F45442F80B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VideoGamesShop.Core", "VideoGamesShop.Core\VideoGamesShop.Core.csproj", "{B425F281-616B-4046-B4A8-00F45442F80B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VideoGamesShop.Infrastructure", "VideoGamesShop.Infrastructure\VideoGamesShop.Infrastructure.csproj", "{0EDEC9F3-F29C-476F-B6F9-676DD93C1E4D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VideoGamesShop.Infrastructure", "VideoGamesShop.Infrastructure\VideoGamesShop.Infrastructure.csproj", "{0EDEC9F3-F29C-476F-B6F9-676DD93C1E4D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VideoGamesShop.Api", "VideoGamesShop.Api\VideoGamesShop.Api.csproj", "{BDE642B5-3D5E-4FBF-98DE-519C3A031CDE}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -27,6 +29,10 @@ Global
 		{0EDEC9F3-F29C-476F-B6F9-676DD93C1E4D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0EDEC9F3-F29C-476F-B6F9-676DD93C1E4D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0EDEC9F3-F29C-476F-B6F9-676DD93C1E4D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BDE642B5-3D5E-4FBF-98DE-519C3A031CDE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BDE642B5-3D5E-4FBF-98DE-519C3A031CDE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BDE642B5-3D5E-4FBF-98DE-519C3A031CDE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BDE642B5-3D5E-4FBF-98DE-519C3A031CDE}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
