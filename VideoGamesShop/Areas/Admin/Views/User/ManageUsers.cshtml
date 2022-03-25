@@ -1,0 +1,47 @@
+﻿@using VideoGamesShop.Core.Models
+@using System.Linq;
+@model IEnumerable<UserListViewModel>
+@{
+}
+
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">Application Users</h5>
+
+                <!-- Default Table -->
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th scope="col">User</th>
+                            <th scope="col">Email</th>
+                            <th scope="col">Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var user in Model)
+                        {
+                            <tr>
+                                @if (user.Name == null || string.IsNullOrWhiteSpace(user.Name))
+                                {
+                                    <td>Not added</td>
+                                }
+                                else
+                                {
+                                    <td>@user.Name</td>
+                                }
+                                <td>@user.Email</td>
+                                <td>
+                                    <a asp-area="admin" asp-action="roles" asp-controller="user" asp-route-id="@user.Id" class="btn btn-secondary btn-sm" type="button">Roles</a>
+                                    <a asp-area="admin" asp-action="delete" asp-controller="user" asp-route-id="@user.Id" class="btn btn-danger btn-sm" type="button">Delete</a>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+                <!-- End Default Table Example -->
+            </div>
+        </div>
+    </div>
+</div>

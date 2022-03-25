@@ -114,7 +114,7 @@
                         <button id="registerSubmit" type="submit" class="btn btn-primary w-100">Create Account</button>
                     </div>
                     <div class="col-12">
-                      <p class="small mb-0">Already have an account? <a href="~/Login.cshtml">Log in</a></p>
+                      <p class="small mb-0">Already have an account? <a href="~/Identity/Account/Login">Log in</a></p>
                     </div>
                   </form>
 
@@ -153,14 +153,12 @@
   <!-- Template Main JS File -->
   <script src="~/assets/js/main.js"></script>
 
-
-  <partial name="_ValidationScriptsPartial" />
-
-
 </body>
 
 </html>
-
+@section Scripts{
+    <partial name="_ValidationScriptsPartial"/>
+}
 
 @*<h1>@ViewData["Title"]</h1>
 

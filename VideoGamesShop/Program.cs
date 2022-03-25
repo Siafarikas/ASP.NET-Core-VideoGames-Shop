@@ -27,7 +27,6 @@ builder.Services.AddControllersWithViews()
         options.ModelBinderProviders.Insert(2, new DoubleModelBinderProvider());
     });
 
-
 builder.Services.AddApplicationServices();
 
 var app = builder.Build();
@@ -51,6 +50,11 @@ app.UseRouting();
 
 app.UseAuthentication();
 app.UseAuthorization();
+
+app.MapControllerRoute(
+    name: "Area",
+    pattern: "{area:exists}/{controller=Home}/{action=Index}/{id?}");
+app.MapRazorPages();
 
 app.MapControllerRoute(
     name: "default",

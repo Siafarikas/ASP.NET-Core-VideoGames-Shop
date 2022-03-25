@@ -1,5 +1,4 @@
-﻿
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -38,8 +37,11 @@
     ======================================================== -->
 </head>
 
-<body>
-    @RenderBody()
+<body class="toggle-sidebar">
+    <br />
+    <br />
+    <br />
+    <br />
     <!-- ======= Header ======= -->
     <header id="header" class="header fixed-top d-flex align-items-center">
 
@@ -145,7 +147,7 @@
                 <li class="nav-item dropdown">
 
                     <a class="nav-link nav-icon" href="#" data-bs-toggle="dropdown">
-                        <i class="bi bi-cart2"></i> 
+                        <i class="bi bi-cart2"></i>
                         <span class="badge bg-primary badge-number">3</span>
                     </a><!-- End Messages Icon -->
 
@@ -214,8 +216,8 @@
 
                     <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile">
                         <li class="dropdown-header">
-                            <h6>Kevin Anderson</h6>
-                            <span>Web Designer</span>
+                            <h6>Kevin S</h6>
+                            <span>Web Programmer</span>
                         </li>
                         <li>
                             <hr class="dropdown-divider">
@@ -257,7 +259,7 @@
                                 <span>Sign Out</span>*@
 
                             <form class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Page("/", new { area = "" })" method="post">
-                                
+
                                 <button type="submit" class="dropdown-item d-flex"><i class="bi bi-door-open"> </i>Sign Out</button>
                             </form>
                         </li>
@@ -291,7 +293,10 @@
         </ul>
     </aside>
     <!-- End Dashboard Nav -->
-    </main><!-- End #main -->
+    <main id="main" class="main">
+        @RenderBody()
+    </main>
+    <!-- End #main -->
     <!-- ======= Footer ======= -->
     <footer id="footer" class="footer">
         <div class="copyright">
