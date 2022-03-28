@@ -31,13 +31,12 @@ namespace VideoGamesShop.Infrastructure.Data.Models
         [MaxLength(250)]
         public string ImageUrl { get; set; }
 
-
+        public int Sales { get; init; } = 0;
 
         public int DeveloperId { get; set; }
 
         [ForeignKey(nameof(DeveloperId))]
         public Developer Developer { get; set; }
-
 
 
         public Guid GenreId { get; set; } = Guid.NewGuid();
