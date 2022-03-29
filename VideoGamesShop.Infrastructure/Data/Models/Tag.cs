@@ -7,7 +7,7 @@ namespace VideoGamesShop.Infrastructure.Data.Models
     public class Tag
     {
         [Key]
-        public int Id { get; set; } 
+        public string Id { get; set; } = Guid.NewGuid().ToString();
 
         [Required]
         [StringLength(TagMaxLength)]

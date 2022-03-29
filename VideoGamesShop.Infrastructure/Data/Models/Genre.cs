@@ -7,7 +7,7 @@ namespace VideoGamesShop.Infrastructure.Data.Models
     public class Genre
     {
         [Key]
-        public Guid Id { get; set; } = Guid.NewGuid();
+        public string Id { get; set; } = Guid.NewGuid().ToString();
 
         [Required]
         [MinLength(GenreMinLength), MaxLength(GenreMaxLength)]

@@ -8,7 +8,7 @@ namespace VideoGamesShop.Infrastructure.Data.Models
     public class Game
     {
         [Key]
-        public Guid Id { get; set; } = Guid.NewGuid();
+        public string Id { get; set; } = Guid.NewGuid().ToString();
 
 
         [Required]
@@ -34,13 +34,13 @@ namespace VideoGamesShop.Infrastructure.Data.Models
         public int? Sales { get; init; } = 0;
 
 
-        public Guid DeveloperId { get; set; }
+        public string DeveloperId { get; set; }
 
         [ForeignKey(nameof(DeveloperId))]
         public Developer Developer { get; set; }
 
 
-        public Guid GenreId { get; set; } = Guid.NewGuid();
+        public string GenreId { get; set; } 
 
         [ForeignKey(nameof(GenreId))]
         public Genre Genre { get; set; }

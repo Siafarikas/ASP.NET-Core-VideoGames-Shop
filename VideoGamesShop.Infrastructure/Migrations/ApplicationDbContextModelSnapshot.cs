@@ -3,19 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
-using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using VideoGamesShop.Infrastructure.Data;
 
 #nullable disable
 
-namespace VideoGamesShop.Infrastructure.Data.Migrations
+namespace VideoGamesShop.Infrastructure.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20220328222437_ModelsAdded")]
-    partial class ModelsAdded
+    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
     {
-        protected override void BuildTargetModel(ModelBuilder modelBuilder)
+        protected override void BuildModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -239,9 +237,8 @@ namespace VideoGamesShop.Infrastructure.Data.Migrations
 
             modelBuilder.Entity("VideoGamesShop.Infrastructure.Data.Models.Developer", b =>
                 {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
+                    b.Property<string>("Id")
+                        .HasColumnType("nvarchar(450)");
 
                     b.HasKey("Id");
 
@@ -250,20 +247,21 @@ namespace VideoGamesShop.Infrastructure.Data.Migrations
 
             modelBuilder.Entity("VideoGamesShop.Infrastructure.Data.Models.Game", b =>
                 {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
+                    b.Property<string>("Id")
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("Description")
                         .IsRequired()
                         .HasMaxLength(250)
                         .HasColumnType("nvarchar(250)");
 
-                    b.Property<Guid>("DeveloperId")
-                        .HasColumnType("uniqueidentifier");
+                    b.Property<string>("DeveloperId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
 
-                    b.Property<Guid>("GenreId")
-                        .HasColumnType("uniqueidentifier");
+                    b.Property<string>("GenreId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("ImageUrl")
                         .IsRequired()
@@ -295,9 +293,8 @@ namespace VideoGamesShop.Infrastructure.Data.Migrations
 
             modelBuilder.Entity("VideoGamesShop.Infrastructure.Data.Models.Genre", b =>
                 {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
+                    b.Property<string>("Id")
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("Title")
                         .IsRequired()
@@ -309,16 +306,28 @@ namespace VideoGamesShop.Infrastructure.Data.Migrations
                     b.ToTable("Genres");
                 });
 
+            modelBuilder.Entity("VideoGamesShop.Infrastructure.Data.Models.Item", b =>
+                {
+                    b.Property<string>("UserId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("GameId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("UserId", "GameId");
+
+                    b.HasIndex("GameId");
+
+                    b.ToTable("CartItems");
+                });
+
             modelBuilder.Entity("VideoGamesShop.Infrastructure.Data.Models.Tag", b =>
                 {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
+                    b.Property<string>("Id")
+                        .HasColumnType("nvarchar(450)");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
-
-                    b.Property<Guid?>("GameId")
-                        .HasColumnType("uniqueidentifier");
+                    b.Property<string>("GameId")
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("Title")
                         .IsRequired()
@@ -400,6 +409,17 @@ namespace VideoGamesShop.Infrastructure.Data.Migrations
                     b.Navigation("Developer");
 
                     b.Navigation("Genre");
+                });
+
+            modelBuilder.Entity("VideoGamesShop.Infrastructure.Data.Models.Item", b =>
+                {
+                    b.HasOne("VideoGamesShop.Infrastructure.Data.Models.Game", "Game")
+                        .WithMany()
+                        .HasForeignKey("GameId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Game");
                 });
 
             modelBuilder.Entity("VideoGamesShop.Infrastructure.Data.Models.Tag", b =>
