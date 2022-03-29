@@ -6,7 +6,7 @@
         {
             public const string Administrator = "Administrator";
 
-            public const string Manager = "Administrator, Manager";
+            public const string Developer = "Developer";
         }
 
     }
