@@ -31,9 +31,10 @@ namespace VideoGamesShop.Infrastructure.Data.Models
         [MaxLength(250)]
         public string ImageUrl { get; set; }
 
-        public int Sales { get; init; } = 0;
+        public int? Sales { get; init; } = 0;
 
-        public int DeveloperId { get; set; }
+
+        public Guid DeveloperId { get; set; }
 
         [ForeignKey(nameof(DeveloperId))]
         public Developer Developer { get; set; }
@@ -43,7 +44,6 @@ namespace VideoGamesShop.Infrastructure.Data.Models
 
         [ForeignKey(nameof(GenreId))]
         public Genre Genre { get; set; }
-
 
 
         public IList<Tag> Tags { get; set; } = new List<Tag>();

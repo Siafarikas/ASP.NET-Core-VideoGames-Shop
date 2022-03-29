@@ -11,11 +11,7 @@ namespace VideoGamesShop.Infrastructure.Data.Models
 
         [Required]
         [MinLength(GenreMinLength), MaxLength(GenreMaxLength)]
-        public string Label { get; set; }
-
-        [Required]
-        [StringLength(GenreDescMaxLength)]
-        public string Description { get; set; }
+        public string Title { get; set; }
 
         /*[Required]
         public DateOnly DateFrom { get; set; } = DateOnly.FromDateTime(DateTime.Today);

@@ -1,10 +1,11 @@
-﻿namespace VideoGamesShop.Infrastructure.Data.Models
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace VideoGamesShop.Infrastructure.Data.Models
 {
     public class Developer
     {
-        public int Id { get; set; }
-
-        public string Title { get; set; }
+        [Key]
+        public Guid Id { get; set; } = Guid.NewGuid();
 
         public IList<Game> Games { get; set; } = new List<Game>();
     }

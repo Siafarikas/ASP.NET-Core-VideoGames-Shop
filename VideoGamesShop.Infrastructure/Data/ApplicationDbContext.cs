@@ -15,6 +15,6 @@ namespace VideoGamesShop.Infrastructure.Data
         public DbSet<Game> Games { get; set; }
         public DbSet<Genre> Genres { get; set; }
         public DbSet<Tag> Tags { get; set; }
-        public DbSet<Developer> Developers { get; set;}
+        public DbSet<Developer> Developers { get; set; }
     }
 }
