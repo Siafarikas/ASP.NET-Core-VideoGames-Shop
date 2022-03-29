@@ -22,16 +22,16 @@ namespace VideoGamesShop.Core.Services
 
         public async Task<IEnumerable<GameListViewModel>> GetGames()
         {
-            return await repo.All<Game>()
-                .Select(g => new GameListViewModel()
-                {
-                    Id = g.Id.ToString(),
-                    Title = g.Title,
-                    Price = g.Price,
-                    Genre = g.Genre.ToString(),
-                    ImageUrl = g.ImageUrl
-                })
-                .ToListAsync();
+            return await (from game in repo.All<Game>()
+                    from genre in repo.All<Genre>().Where(gr => gr.Id == game.GenreId).DefaultIfEmpty()
+                select new GameListViewModel()
+                 {
+                     Id = game.Id.ToString(),
+                     Title = game.Title,
+                     Price = game.Price,
+                     Genre = genre.Title,
+                     ImageUrl = game.ImageUrl
+                 }).ToListAsync();
         }
     }
 }

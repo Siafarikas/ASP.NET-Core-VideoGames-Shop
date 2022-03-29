@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using VideoGamesShop.Core.Contracts;
-using VideoGamesShop.Core.Models;
+using VideoGamesShop.Core.User.Models;
 using VideoGamesShop.Infrastructure.Data.Identity;
 using VideoGamesShop.Infrastructure.Data.Repositories;
 
@@ -58,5 +58,6 @@ namespace VideoGamesShop.Core.Services
 
             return result;
         }
+
     }
 }

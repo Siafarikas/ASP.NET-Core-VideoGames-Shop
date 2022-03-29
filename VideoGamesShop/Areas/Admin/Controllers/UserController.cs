@@ -2,7 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using VideoGamesShop.Core.Contracts;
-using VideoGamesShop.Core.Models;
+using VideoGamesShop.Core.User.Models;
 using VideoGamesShop.Infrastructure.Data.Identity;
 
 namespace VideoGamesShop.Areas.Admin.Controllers
@@ -102,14 +102,6 @@ namespace VideoGamesShop.Areas.Admin.Controllers
             return View(model);
         }*/
 
-        //public async Task<IActionResult> CreateRole()
-        //{
-        //    await roleManager.CreateAsync(new IdentityRole()
-        //    {
-        //        Name = "Administrator"
-        //    });
-
-        //    return Ok();
-        //}
+        
     }
 }

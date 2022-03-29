@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace VideoGamesShop.Core.Models
+namespace VideoGamesShop.Core.User.Models
 {
     public class UserListViewModel
     {

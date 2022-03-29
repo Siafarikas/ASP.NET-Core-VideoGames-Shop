@@ -1,4 +1,4 @@
-﻿namespace VideoGamesShop.Core.Models
+﻿namespace VideoGamesShop.Core.User.Models
 {
     public class UserRolesViewModel
     {

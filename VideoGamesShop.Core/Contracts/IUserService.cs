@@ -1,4 +1,4 @@
-﻿using VideoGamesShop.Core.Models;
+﻿using VideoGamesShop.Core.User.Models;
 using VideoGamesShop.Infrastructure.Data.Identity;
 
 namespace VideoGamesShop.Core.Contracts
