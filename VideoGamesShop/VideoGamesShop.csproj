@@ -32,4 +32,8 @@
     <ProjectReference Include="..\VideoGamesShop.Core\VideoGamesShop.Core.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Areas\Developer\Views\Game\" />
+  </ItemGroup>
+
 </Project>

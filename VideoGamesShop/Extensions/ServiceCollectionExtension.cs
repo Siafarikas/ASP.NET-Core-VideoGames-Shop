@@ -12,6 +12,7 @@ namespace Microsoft.Extensions.DependencyInjection
         {
             services.AddScoped<IApplicatioDbRepo, ApplicatioDbRepo>();
             services.AddScoped<IUserService, UserService>();
+            services.AddScoped<IGameService, GameService>();
 
             return services;
         }
