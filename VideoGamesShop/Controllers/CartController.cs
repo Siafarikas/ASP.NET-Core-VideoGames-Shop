@@ -12,6 +12,13 @@ namespace VideoGamesShop.Controllers
             cartService = _cartService;
         }
 
+        public async Task<IActionResult> MyCart(string userId)
+        {
+            var productsInCart = await cartService.UsersCart(userId);
+
+            return View(productsInCart);
+        }
+
 
         public IActionResult Index()
         {

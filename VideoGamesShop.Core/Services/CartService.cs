@@ -22,7 +22,7 @@ namespace VideoGamesShop.Core.Services
 
         public async Task<bool> AddToCart(string userId, string gameId)
         {
-            var user = userService.GetUserById(userId);
+            var user = await userService.GetUserById(userId);
 
             if (user == null) return false;
 
@@ -51,7 +51,7 @@ namespace VideoGamesShop.Core.Services
             await repo.AddAsync(cartItem);
             await repo.SaveChangesAsync();
 
-            return true; 
+            return true;
         }
 
         public async Task<bool> Delete(string productId, string user)
@@ -62,7 +62,16 @@ namespace VideoGamesShop.Core.Services
 
         public async Task<IEnumerable<CartItemViewModel>> UsersCart(string userId)
         {
-            throw new NotImplementedException();
+            return await (from i in repo.All<Item>()
+                          from g in repo.All<Game>().Where(g => g.Id == i.GameId).DefaultIfEmpty()
+                          select new CartItemViewModel()
+                          {
+                              GameId = i.GameId,
+                              Title = g.Title,
+                              Price = g.Price,
+                              ImageUrl = g.ImageUrl
+
+                          }).ToListAsync();
         }
 
     }
