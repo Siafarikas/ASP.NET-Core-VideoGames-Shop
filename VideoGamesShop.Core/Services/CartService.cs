@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using System.Globalization;
 using VideoGamesShop.Core.Contracts;
 using VideoGamesShop.Core.Models.Cart;
 using VideoGamesShop.Infrastructure.Data.Identity;
@@ -54,9 +55,17 @@ namespace VideoGamesShop.Core.Services
             return true;
         }
 
-        public async Task<bool> Delete(string productId, string user)
+        public async Task<bool> RemoveFromCart(string userId, string gameId)
         {
-            throw new NotImplementedException();
+            var product = repo.All<Item>().Where(p => p.GameId == gameId && p.UserId == userId).FirstOrDefault();
+            if (product == null)
+            {
+                return false;
+            }
+
+            repo.Delete(product);
+            repo.SaveChanges();
+            return true;
         }
 
 
@@ -64,16 +73,39 @@ namespace VideoGamesShop.Core.Services
         {
             return await (from i in repo.All<Item>()
                           from g in repo.All<Game>().Where(g => g.Id == i.GameId).DefaultIfEmpty()
+                          from d in repo.All<Developer>().Where(d => d.Id == g.DeveloperId).DefaultIfEmpty()
+                          from gr in repo.All<Genre>().Where(gr=> gr.Id == g.GenreId).DefaultIfEmpty()
                           select new CartItemViewModel()
                           {
                               GameId = i.GameId,
                               Title = g.Title,
                               Price = g.Price,
-                              ImageUrl = g.ImageUrl
+                              ImageUrl = g.ImageUrl,
+                              Description = g.Description,
+                              Developer = d.Id,
+                              Genre = gr.Title,
+                              ReleaseDate = g.ReleaseDate.ToString("yyyy-MM-dd")
 
                           }).ToListAsync();
         }
 
+
+        //public async Task<IEnumerable<CartItemViewModel>> UsersCart(string userId)
+        //{
+        //    return await (from i in repo.All<Item>()
+        //                  from g in repo.All<Game>().Where(g => g.Id == i.GameId).DefaultIfEmpty()
+        //                  select new CartItemViewModel()
+        //                  {
+        //                      GameId = i.GameId,
+        //                      Title = g.Title,
+        //                      Price = g.Price,
+        //                      ImageUrl = g.ImageUrl,
+        //                      Description = g.Description,
+        //                      Developer = g.Developer.ToString(),
+        //                      Genre = g.Genre.ToString()
+
+        //                  }).ToListAsync();
+        //}
     }
 
 

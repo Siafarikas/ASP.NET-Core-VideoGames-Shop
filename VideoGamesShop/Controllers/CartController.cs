@@ -19,6 +19,12 @@ namespace VideoGamesShop.Controllers
             return View(productsInCart);
         }
 
+        public async Task<IActionResult> RemoveFromCart(string userId, string gameId)
+        {
+            await cartService.RemoveFromCart(userId, gameId);
+
+            return Redirect("~/cart/mycart");
+        }
 
         public IActionResult Index()
         {
