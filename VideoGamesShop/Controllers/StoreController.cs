@@ -48,6 +48,14 @@ namespace VideoGamesShop.Controllers
             return View();
         }
 
+        [Authorize]
+        public async Task<IActionResult> GameDetails(string gameId)
+        {
+            var game = await gameService.GameDetails(gameId);
+
+            return View(game);
+        }
+
         public IActionResult Index()
         {
             return View();

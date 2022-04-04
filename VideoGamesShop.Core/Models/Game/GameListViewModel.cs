@@ -1,13 +1,12 @@
-﻿namespace VideoGamesShop.Core.Models.Cart
+﻿namespace VideoGamesShop.Core.Models
 {
-    public class CartItemViewModel
+    public class GameListViewModel
     {
-        public string UserId { get; set; }
 
-        public string GameId { get; set; }
+        public string Id { get; set; }
 
         public string Title { get; set; }
-        
+
         public string Description { get; set; }
 
         public string Genre { get; set; }
@@ -19,6 +18,5 @@
         public string ImageUrl { get; set; }
 
         public decimal Price { get; set; }
-
     }
 }

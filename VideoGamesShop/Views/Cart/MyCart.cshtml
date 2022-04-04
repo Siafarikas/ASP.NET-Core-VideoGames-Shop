@@ -49,7 +49,7 @@
                     <!-- Card -->
                     <div class="card wish-list mb-4">
                         <div class="card-body">
-
+                            <br>
                             <h5 class="mb-4">Cart (<span>@Model.Select(p => p.UserId == @User.FindFirst(ClaimTypes.NameIdentifier).Value).Count()</span> items)</h5>
 
                             @foreach (var game in @Model)
@@ -70,7 +70,8 @@
                                             </div>
                                             <div class="d-flex justify-content-between align-items-center">
                                                 <div>
-                                                    <a asp-controller="Cart" asp-action="RemoveFromCart" asp-route-userId="@User.FindFirst(ClaimTypes.NameIdentifier).Value" asp-route-gameId="@game.GameId" class="btn btn-danger"> <i class="fas fa-trash-alt mr-1"></i>Remove item</a>
+                                                    <a asp-controller="Store" asp-action="GameDetails" asp-route-gameId="@game.GameId" class="btn btn-secondary"><i class="bi bi-info-circle me-1"> Details</i></a>
+                                                    <a asp-controller="Cart" asp-action="RemoveFromCart" asp-route-userId="@User.FindFirst(ClaimTypes.NameIdentifier).Value" asp-route-gameId="@game.GameId" class="btn btn-danger"> <i class="bi bi-trash me-1"></i> Remove</a>
                                                     <a href="#!" type="button" class="card-link-secondary small text-uppercase"><i class="fas fa-heart mr-1"></i> Move to wish list </a>
                                                 </div>
                                                 <p class="mb-0"><span><strong>$@game.Price</strong></span></p>
