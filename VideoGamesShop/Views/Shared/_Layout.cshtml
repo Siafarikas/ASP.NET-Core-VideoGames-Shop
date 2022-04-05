@@ -1,4 +1,12 @@
 ﻿@using System.Security.Claims
+@using Microsoft.AspNetCore.Identity
+@using VideoGamesShop.Infrastructure.Data.Identity
+@using static VideoGamesShop.Core.Constants.UserConstants
+@inject UserManager<ApplicationUser> UserManager
+
+@{
+    ApplicationUser user = await UserManager.GetUserAsync(User);
+}
 <!DOCTYPE html>
 <html lang="en">
 
@@ -146,11 +154,12 @@
                 </li><!-- End Notification Nav -->
 
                 <li class="nav-item">
+                    @if (User.Identity.IsAuthenticated)
+                    {
+                        <a asp-controller="Cart" asp-action="MyCart" asp-route-userId="@User.FindFirst(ClaimTypes.NameIdentifier).Value" class="nav-link"><i class="bi bi-cart2"></i></a>
+                    }
 
-                    <a class="nav-link" href="~/cart/mycart">
-                        <big><i class="bi bi-cart2"></i></big>
-                        @* <span class="badge bg-primary badge-number">3</span>*@
-                    </a><!-- End Messages Icon -->
+                    <!-- End Messages Icon -->
                 </li>
 
                 <!-- End Messages Nav -->
@@ -161,18 +170,31 @@
 
                     <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile">
                         <li class="dropdown-header">
-                            <h6></h6>
-                            <span>Web Programmer</span>
+                            <h6>@user.FirstName @user.LastName</h6>
+                            @if (@User.IsInRole(Roles.Administrator))
+                            {
+                                <span>Admin</span>
+                            }
+                            else if (@User.IsInRole(Roles.Developer))
+                            {
+                                <span>Developer</span>
+                            }
+                            else
+                            {
+                                <span>User</span>
+                            }
                         </li>
                         <li>
                             <hr class="dropdown-divider">
                         </li>
 
                         <li>
-                            <a class="dropdown-item d-flex align-items-center" href="users-profile.html">
-                                <i class="bi bi-person"></i>
-                                <span>My Profile</span>
-                            </a>
+                            @if (User.Identity.IsAuthenticated)
+                            {
+                                <a class="dropdown-item d-flex align-items-center" asp-controller="User" asp-action="Profile" asp-route-userId="@User.FindFirst(ClaimTypes.NameIdentifier).Value">
+                                    <i class="bi bi-person"></i>My Profile
+                                </a>
+                            }
                         </li>
                         <li>
                             <hr class="dropdown-divider">
@@ -242,7 +264,26 @@
                 </a>
             </li>
 
+            @if (@User.IsInRole("Developer"))
+            {
+                <br />
+                <li class="nav-heading">Developer Tools</li>
 
+                <li class="nav-item">
+                    <a class="nav-link" href="~/store/games">
+                        <i class="bi bi-grid"></i>
+                        <span>Dashboard</span>
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" href="~/store/games">
+                        <i class="ri ri-gamepad-line"></i>
+                        <span>Publish Game</span>
+                    </a>
+                </li>
+
+            }
         </ul>
     </aside>
     <!-- End Dashboard Nav -->
