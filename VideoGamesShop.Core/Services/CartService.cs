@@ -57,7 +57,7 @@ namespace VideoGamesShop.Core.Services
 
         public async Task<bool> RemoveFromCart(string userId, string gameId)
         {
-            var product = repo.All<Item>().Where(p => p.GameId == gameId && p.UserId == userId).FirstOrDefault();
+            var product = await repo.All<Item>().Where(p => p.GameId == gameId && p.UserId == userId).FirstOrDefaultAsync();
             if (product == null)
             {
                 return false;
@@ -71,9 +71,11 @@ namespace VideoGamesShop.Core.Services
 
         public async Task<IEnumerable<CartItemViewModel>> UsersCart(string userId)
         {
-            return await (from i in repo.All<Item>()
+            var products = await repo.All<Item>().Where(i => i.UserId == userId).ToListAsync();
+
+            return await (from i in repo.All<Item>().Where(i => i.UserId == userId)
                           from g in repo.All<Game>().Where(g => g.Id == i.GameId).DefaultIfEmpty()
-                          from d in repo.All<Developer>().Where(d => d.Id == g.DeveloperId).DefaultIfEmpty()
+                          from dev in repo.All<Developer>().Where(d => d.Id == g.DeveloperId).DefaultIfEmpty()
                           from gr in repo.All<Genre>().Where(gr=> gr.Id == g.GenreId).DefaultIfEmpty()
                           select new CartItemViewModel()
                           {
@@ -82,7 +84,7 @@ namespace VideoGamesShop.Core.Services
                               Price = g.Price,
                               ImageUrl = g.ImageUrl,
                               Description = g.Description,
-                              Developer = d.Id,
+                              Developer = $"{dev.FirstName} {dev.LastName}",
                               Genre = gr.Title,
                               ReleaseDate = g.ReleaseDate.ToString("yyyy-MM-dd")
 

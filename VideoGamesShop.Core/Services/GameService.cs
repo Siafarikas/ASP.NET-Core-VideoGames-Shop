@@ -23,17 +23,17 @@ namespace VideoGamesShop.Core.Services
 
         public async Task<GameDetailsViewModel> GameDetails(string gameId)
         {
-#pragma warning disable CS8603 // Possible null reference return.
 
             return await (from game in repo.All<Game>()
                           .Where(g => g.Id == gameId)
                           from genre in repo.All<Genre>().Where(gr => gr.Id == game.GenreId).DefaultIfEmpty()
+                          from dev in repo.All<Developer>().Where(d => d.Id == game.DeveloperId).DefaultIfEmpty()
                           select new GameDetailsViewModel()
                           {
                               GameId = game.Id.ToString(),
                               Description = game.Description,
                               ReleaseDate = game.ReleaseDate.ToString("yyyy-MM-dd"),
-                              Developer = game.Developer.Id.ToString(),
+                              Developer = $"{dev.FirstName} {dev.LastName}",
                               Title = game.Title,
                               Price = game.Price,
                               Genre = genre.Title,
@@ -41,7 +41,6 @@ namespace VideoGamesShop.Core.Services
                           })
                           .FirstOrDefaultAsync();
 
-#pragma warning restore CS8603 // Possible null reference return.
 
         }
 
@@ -49,13 +48,15 @@ namespace VideoGamesShop.Core.Services
         {
             return await (from game in repo.All<Game>()
                           from genre in repo.All<Genre>().Where(gr => gr.Id == game.GenreId).DefaultIfEmpty()
+                          from dev in repo.All<Developer>().Where(d => d.Id == game.DeveloperId).DefaultIfEmpty()
                           select new GameListViewModel()
                           {
                               Id = game.Id.ToString(),
                               Title = game.Title,
                               Price = game.Price,
                               Genre = genre.Title,
-                              ImageUrl = game.ImageUrl
+                              ImageUrl = game.ImageUrl,
+                              Developer = $"{dev.FirstName} {dev.LastName}"
                           }).ToListAsync();
         }
     }

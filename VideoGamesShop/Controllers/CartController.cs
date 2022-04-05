@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using VideoGamesShop.Core.Contracts;
 
 namespace VideoGamesShop.Controllers
@@ -12,6 +13,7 @@ namespace VideoGamesShop.Controllers
             cartService = _cartService;
         }
 
+        [Authorize]
         public async Task<IActionResult> MyCart(string userId)
         {
             var productsInCart = await cartService.UsersCart(userId);
@@ -19,11 +21,12 @@ namespace VideoGamesShop.Controllers
             return View(productsInCart);
         }
 
+        [Authorize]
         public async Task<IActionResult> RemoveFromCart(string userId, string gameId)
         {
             await cartService.RemoveFromCart(userId, gameId);
 
-            return Redirect("~/cart/mycart");
+            return RedirectToAction("MyCart", "Cart", new { userId = userId});
         }
 
         public IActionResult Index()

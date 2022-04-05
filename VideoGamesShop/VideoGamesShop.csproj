@@ -33,7 +33,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Areas\Developer\Views\Game\" />
     <Folder Include="Views\Error\" />
   </ItemGroup>
 

@@ -38,7 +38,7 @@ namespace VideoGamesShop.Controllers
             {
                 //TempData[GlobalMessageKey] = "An error accured";
             }
-            return Redirect("~/store/games");
+            return RedirectToAction("MyCart", "Cart", new {userId = userId});
         }
 
         [Authorize]

@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using VideoGamesShop.Core.Contracts;
+using VideoGamesShop.Core.Models.User;
 using VideoGamesShop.Core.User.Models;
 using VideoGamesShop.Infrastructure.Data.Identity;
 using VideoGamesShop.Infrastructure.Data.Repositories;
@@ -40,6 +41,20 @@ namespace VideoGamesShop.Core.Services
                     Name = $"{u.FirstName} {u.LastName}"
                 })
                 .ToListAsync();
+        }
+
+        public async Task<UserProfileViewModel> GetUserProfileInfo(string id)
+        {
+            return await repo.All<ApplicationUser>()
+                .Where(u => u.Id == id)
+                .Select(u => new UserProfileViewModel()
+                {
+                    Id = u.Id,
+                    Email = u.Email,
+                    FirstName = u.FirstName,
+                    LastName = u.LastName
+                })
+                .FirstOrDefaultAsync();
         }
 
         public async Task<bool> UpdateUser(UserEditViewModel model)

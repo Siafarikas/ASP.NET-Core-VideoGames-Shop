@@ -39,14 +39,12 @@ namespace VideoGamesShop.Controllers
             return View();
         }
 
-        public async Task<IActionResult> CreateRole()
+        public async Task<IActionResult> Profile(string userId)
         {
-            await roleManager.CreateAsync(new IdentityRole()
-            {
-                Name = "Developer"
-            });
+            var user = await userService.GetUserProfileInfo(userId);
 
-            return Ok();
+            return View(user);
         }
+
     }
 }

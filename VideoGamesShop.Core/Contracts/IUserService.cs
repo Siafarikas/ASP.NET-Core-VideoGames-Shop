@@ -1,4 +1,5 @@
-﻿using VideoGamesShop.Core.User.Models;
+﻿using VideoGamesShop.Core.Models.User;
+using VideoGamesShop.Core.User.Models;
 using VideoGamesShop.Infrastructure.Data.Identity;
 
 namespace VideoGamesShop.Core.Contracts
@@ -12,5 +13,7 @@ namespace VideoGamesShop.Core.Contracts
         Task<bool> UpdateUser(UserEditViewModel model);
 
         Task<ApplicationUser> GetUserById(string id);
+
+        Task<UserProfileViewModel> GetUserProfileInfo(string id);
     }
 }
