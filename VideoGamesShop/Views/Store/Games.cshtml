@@ -7,12 +7,11 @@
 <style>
     h1 {
         font-size: 60px;
-        color: blue;
     }
 </style>
 
 <div class="small-container">
-    <center><b><h1>STORE</h1></b></center>
+    <center><b><h1>Game Store</h1></b></center>
     <br />
     <br />
     <div class="row">
@@ -28,7 +27,7 @@
                         <br>
                         <center>
                             <a asp-controller="Store" asp-action="GameDetails" asp-route-gameId="@game.Id" class="btn btn-secondary"><i class="bi bi-info-circle me-1"></i></a>
-                            <a asp-controller="Store" asp-action="AddToCart" asp-route-userId="@User.FindFirst(ClaimTypes.NameIdentifier).Value" asp-route-gameId="@game.Id" class="btn btn-primary"><i class="bi bi-cart2 me-1"></i></a>
+                            <a asp-controller="Store" asp-action="AddToCart" asp-route-userId="@User.FindFirst(ClaimTypes.NameIdentifier).Value" asp-route-gameId="@game.Id" class="btn btn-primary"><center><i class="bi bi-cart2 me-1"></i></center></a>
                             <button type="button" class="btn btn-danger"><i class="bi bi-heart me-1"></i></button>
                         </center>
                     </div>
