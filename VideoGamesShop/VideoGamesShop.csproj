@@ -9,9 +9,13 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Areas\Developer\**" />
     <Compile Remove="wwwroot\Plugins\**" />
+    <Content Remove="Areas\Developer\**" />
     <Content Remove="wwwroot\Plugins\**" />
+    <EmbeddedResource Remove="Areas\Developer\**" />
     <EmbeddedResource Remove="wwwroot\Plugins\**" />
+    <None Remove="Areas\Developer\**" />
     <None Remove="wwwroot\Plugins\**" />
   </ItemGroup>
 
@@ -33,7 +37,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Areas\Developer\Views\Game\" />
     <Folder Include="Views\Error\" />
   </ItemGroup>
 
