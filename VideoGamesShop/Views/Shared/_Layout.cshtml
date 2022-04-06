@@ -3,9 +3,18 @@
 @using VideoGamesShop.Infrastructure.Data.Identity
 @using static VideoGamesShop.Core.Constants.UserConstants
 @inject UserManager<ApplicationUser> UserManager
+@inject SignInManager<ApplicationUser> SignInManager
 
 @{
-    ApplicationUser user = await UserManager.GetUserAsync(User);
+     ApplicationUser user = new ApplicationUser()
+    {
+        FirstName = "bug",
+        LastName = "bugger"
+    };
+    @if (SignInManager.IsSignedIn(User))
+    {
+        user = await UserManager.GetUserAsync(User);
+    }
 }
 <!DOCTYPE html>
 <html lang="en">

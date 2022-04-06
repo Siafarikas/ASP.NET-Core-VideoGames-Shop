@@ -4,7 +4,15 @@
 @inject SignInManager<ApplicationUser> SignInManager
 @inject UserManager<ApplicationUser> UserManager
 @{
-    ApplicationUser user = await UserManager.GetUserAsync(User);
+    ApplicationUser user = new ApplicationUser()
+    {
+        FirstName = "bug",
+        LastName = "bugger"
+    };
+    @if (SignInManager.IsSignedIn(User))
+    {
+        user = await UserManager.GetUserAsync(User);
+    }
  }
 
 @if (SignInManager.IsSignedIn(User))
