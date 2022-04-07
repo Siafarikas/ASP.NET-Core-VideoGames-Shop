@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using VideoGamesShop.Infrastructure.Data;
 
@@ -11,9 +12,10 @@ using VideoGamesShop.Infrastructure.Data;
 namespace VideoGamesShop.Infrastructure.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20220406212352_GameCollectionUser")]
+    partial class GameCollectionUser
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -252,7 +254,7 @@ namespace VideoGamesShop.Infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Developers", (string)null);
+                    b.ToTable("Developers");
                 });
 
             modelBuilder.Entity("VideoGamesShop.Infrastructure.Data.Models.Game", b =>
@@ -303,7 +305,7 @@ namespace VideoGamesShop.Infrastructure.Migrations
 
                     b.HasIndex("GenreId");
 
-                    b.ToTable("Games", (string)null);
+                    b.ToTable("Games");
                 });
 
             modelBuilder.Entity("VideoGamesShop.Infrastructure.Data.Models.Genre", b =>
@@ -318,7 +320,7 @@ namespace VideoGamesShop.Infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Genres", (string)null);
+                    b.ToTable("Genres");
                 });
 
             modelBuilder.Entity("VideoGamesShop.Infrastructure.Data.Models.Item", b =>
@@ -333,7 +335,7 @@ namespace VideoGamesShop.Infrastructure.Migrations
 
                     b.HasIndex("GameId");
 
-                    b.ToTable("CartItems", (string)null);
+                    b.ToTable("CartItems");
                 });
 
             modelBuilder.Entity("VideoGamesShop.Infrastructure.Data.Models.Tag", b =>
@@ -353,7 +355,7 @@ namespace VideoGamesShop.Infrastructure.Migrations
 
                     b.HasIndex("GameId");
 
-                    b.ToTable("Tags", (string)null);
+                    b.ToTable("Tags");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>

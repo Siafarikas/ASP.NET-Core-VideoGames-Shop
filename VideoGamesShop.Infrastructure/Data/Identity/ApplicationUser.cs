@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using System.ComponentModel.DataAnnotations;
+using VideoGamesShop.Infrastructure.Data.Models;
 
 namespace VideoGamesShop.Infrastructure.Data.Identity
 {
@@ -13,7 +14,8 @@ namespace VideoGamesShop.Infrastructure.Data.Identity
         [StringLength(50)]
         public string LastName { get; set; }
 
-        public decimal Wallet { get; set; } = 0;
+        public decimal Wallet { get; set; }
 
+        public IList<Game> Games { get; set; } = new List<Game>();
     }
 }
