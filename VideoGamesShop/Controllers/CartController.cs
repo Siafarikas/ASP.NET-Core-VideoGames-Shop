@@ -29,6 +29,14 @@ namespace VideoGamesShop.Controllers
             return RedirectToAction("MyCart", "Cart", new { userId = userId});
         }
 
+        public async Task<IActionResult> Buy(string userId)
+        {
+            await cartService.BuyProductsInCart(userId);
+
+            // return RedirectToAction("MyGames", "Library", new { userId = userId });
+            return Redirect("/");
+        }
+
         public IActionResult Index()
         {
             return View();
