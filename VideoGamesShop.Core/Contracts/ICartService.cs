@@ -9,5 +9,7 @@ namespace VideoGamesShop.Core.Contracts
         Task<bool> AddToCart(string userId, string productId);
 
         Task<bool> RemoveFromCart(string productId, string user);
+
+        Task<bool> BuyProductsInCart(string userId);
     }
 }

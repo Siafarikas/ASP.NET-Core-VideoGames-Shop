@@ -64,7 +64,7 @@ namespace VideoGamesShop.Core.Services
             }
 
             repo.Delete(product);
-            repo.SaveChanges();
+            await repo.SaveChangesAsync();
             return true;
         }
 
@@ -76,7 +76,7 @@ namespace VideoGamesShop.Core.Services
             return await (from i in repo.All<Item>().Where(i => i.UserId == userId)
                           from g in repo.All<Game>().Where(g => g.Id == i.GameId).DefaultIfEmpty()
                           from dev in repo.All<Developer>().Where(d => d.Id == g.DeveloperId).DefaultIfEmpty()
-                          from gr in repo.All<Genre>().Where(gr=> gr.Id == g.GenreId).DefaultIfEmpty()
+                          from gr in repo.All<Genre>().Where(gr => gr.Id == g.GenreId).DefaultIfEmpty()
                           select new CartItemViewModel()
                           {
                               GameId = i.GameId,
@@ -91,23 +91,46 @@ namespace VideoGamesShop.Core.Services
                           }).ToListAsync();
         }
 
+        public async Task<bool> BuyProductsInCart(string userId)
+        {
+            List<Item> items = await (from i in repo.All<Item>().Where(i => i.UserId == userId)
+                                      from g in repo.All<Game>().Where(g => g.Id == i.GameId).DefaultIfEmpty()
+                                      select new Item()
+                                      {
+                                          UserId = i.UserId,
+                                          GameId = i.GameId,
+                                          Game = repo.All<Game>().Where(g => g.Id == i.GameId).SingleOrDefault()
+                                      })
+                           .ToListAsync();
 
-        //public async Task<IEnumerable<CartItemViewModel>> UsersCart(string userId)
-        //{
-        //    return await (from i in repo.All<Item>()
-        //                  from g in repo.All<Game>().Where(g => g.Id == i.GameId).DefaultIfEmpty()
-        //                  select new CartItemViewModel()
-        //                  {
-        //                      GameId = i.GameId,
-        //                      Title = g.Title,
-        //                      Price = g.Price,
-        //                      ImageUrl = g.ImageUrl,
-        //                      Description = g.Description,
-        //                      Developer = g.Developer.ToString(),
-        //                      Genre = g.Genre.ToString()
+            var user = await userService.GetUserById(userId);
 
-        //                  }).ToListAsync();
-        //}
+            var totalAmount = items.Sum(g => g.Game.Price);
+
+            if (user == null) return false;
+
+            if (items.Count == 0)
+            {
+                return false;
+            }
+
+            if (user.Wallet < totalAmount)
+            {
+                return false;
+            }
+
+            foreach (var item in items)
+            {
+                user.Games.Add(item.Game);
+
+                repo.Delete(item);
+            }
+
+            user.Wallet -= totalAmount;
+            await repo.SaveChangesAsync();
+            return true;
+        }
+
     }
 
 
