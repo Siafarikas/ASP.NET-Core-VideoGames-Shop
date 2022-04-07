@@ -6,7 +6,7 @@
 }
 <style>
     img-cart {
-        widt: 150px;
+        width: 150px;
         height: 150px;
     }
 </style>
@@ -36,6 +36,8 @@
 
 <main>
     <div class="container">
+        <center><b><h1>My Cart</h1></b></center>
+
 
         <!--Section: Block Content-->
         <section class="mt-5 mb-4">
@@ -52,6 +54,12 @@
                             <br>
                             <h5 class="mb-4">Cart (<span>@Model.Select(p => p.UserId == @User.FindFirst(ClaimTypes.NameIdentifier).Value).Count()</span> items)</h5>
 
+                            @if (@Model.Select(p => p.UserId == @User.FindFirst(ClaimTypes.NameIdentifier).Value).Count() == 0)
+                            {
+                               <center> No games in cart - <a class="nav-link" href="~/store/games"><span>Go To Store</span></a></center>
+                               <br />
+                            }
+
                             @foreach (var game in @Model)
                             {
                                 <div class="row mb-4">
@@ -63,9 +71,9 @@
                                             <div class="d-flex justify-content-between">
                                                 <div>
                                                     <h5><span><strong>@game.Title</strong></span></h5>
-                                                    <p class="mb-3 text-muted text-uppercase small">Genre - @game.Genre</p>
-                                                    <p class="mb-3 text-muted text-uppercase small">Release Date - @game.ReleaseDate</p>
-                                                    <p class="mb-3 text-muted text-uppercase small">Developer - @game.Developer</p>
+                                                    <p class="mb-3 text-muted text-uppercase small">Genre   -   @game.Genre</p>
+                                                    <p class="mb-3 text-muted text-uppercase small">Release Date    -   @game.ReleaseDate</p>
+                                                    <p class="mb-3 text-muted text-uppercase small">Developer     -    @game.Developer</p>
                                                 </div>
                                             </div>
                                             <div class="d-flex justify-content-between align-items-center">
@@ -88,18 +96,18 @@
                     </div>
                     <!-- Card -->
                     @*<!-- Card -->
-                    <div class="card mb-4">
+                        <div class="card mb-4">
                         <div class="card-body">
 
-                            <h5 class="mb-4">We accept</h5>
+                        <h5 class="mb-4">We accept</h5>
 
-                            <img class="mr-2" width="45px" src="https://mdbootstrap.com/wp-content/plugins/woocommerce-gateway-stripe/assets/images/visa.svg" alt="Visa">
-                            <img class="mr-2" width="45px" src="https://mdbootstrap.com/wp-content/plugins/woocommerce-gateway-stripe/assets/images/amex.svg" alt="American Express">
-                            <img class="mr-2" width="45px" src="https://mdbootstrap.com/wp-content/plugins/woocommerce-gateway-stripe/assets/images/mastercard.svg" alt="Mastercard">
-                            <img class="mr-2" width="45px" src="https://z9t4u9f6.stackpathcdn.com/wp-content/plugins/woocommerce/includes/gateways/paypal/assets/images/paypal.png" alt="PayPal acceptance mark">
+                        <img class="mr-2" width="45px" src="https://mdbootstrap.com/wp-content/plugins/woocommerce-gateway-stripe/assets/images/visa.svg" alt="Visa">
+                        <img class="mr-2" width="45px" src="https://mdbootstrap.com/wp-content/plugins/woocommerce-gateway-stripe/assets/images/amex.svg" alt="American Express">
+                        <img class="mr-2" width="45px" src="https://mdbootstrap.com/wp-content/plugins/woocommerce-gateway-stripe/assets/images/mastercard.svg" alt="Mastercard">
+                        <img class="mr-2" width="45px" src="https://z9t4u9f6.stackpathcdn.com/wp-content/plugins/woocommerce/includes/gateways/paypal/assets/images/paypal.png" alt="PayPal acceptance mark">
                         </div>
-                    </div>
-                    <!-- Card -->*@
+                        </div>
+                        <!-- Card -->*@
 
                 </div>
                 <!--Grid column-->
@@ -119,7 +127,7 @@
                                 </li>
                                 <li class="list-group-item d-flex justify-content-between align-items-center px-0">
                                     Shipping
-                                    <span>Gratis</span>
+                                    <span>$0 (digital)</span>
                                 </li>
                                 <li class="list-group-item d-flex justify-content-between align-items-center border-0 px-0 mb-3">
                                     <div>
@@ -132,10 +140,7 @@
                                 </li>
                             </ul>
 
-                            <button type="button" class="btn btn-primary btn-block waves-effect waves-light">
-                                Buy
-                            </button>
-
+                            <a asp-controller="Cart" asp-action="Buy" asp-route-userId="@User.FindFirst(ClaimTypes.NameIdentifier).Value" class="btn btn-primary">Buy</i></a>
                         </div>
                     </div>
                     <!-- Card -->
