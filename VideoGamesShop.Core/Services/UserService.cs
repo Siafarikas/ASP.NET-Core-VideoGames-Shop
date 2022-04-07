@@ -74,5 +74,13 @@ namespace VideoGamesShop.Core.Services
             return result;
         }
 
+        public async Task AddMoneyToWallet(string userId, decimal amount)
+        {
+            var user = await repo.GetByIdAsync<ApplicationUser>(userId);
+            user.Wallet += amount;
+
+            await repo.SaveChangesAsync();
+        }
+
     }
 }

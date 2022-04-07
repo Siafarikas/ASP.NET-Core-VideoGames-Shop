@@ -1,0 +1,135 @@
+﻿@using VideoGamesShop.Infrastructure.Data.Identity
+@using static VideoGamesShop.Core.Constants.UserConstants
+@model ApplicationUser
+@{
+    ViewData["Title"] = "MyWallet";
+}
+
+<center><b><h1>My Wallet</h1></b></center>
+<main id="main" class="main">
+
+    <section class="section profile">
+        <div class="row">
+            <div class="col-xl-4">
+
+                <div class="card mb-3">
+                    <div class="card-body">
+                        <center><h5 class="card-title">Current Balance<span></span></h5></center>
+                        <center>
+                            <div class="ps-3"> <h6>$@Model.Wallet</h6></div>
+                        </center>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="col-xl-8">
+
+                <div class="card mb-3">
+                    <div class="row g-0">
+                        <div class="col-md-4">
+                            <div class="card-body">
+                                <br />
+                                <h3><b>Add 5,--$</b></h3>
+                            </div>
+                        </div>
+                        <div class="col-md-8">
+                            <div class="card-body">
+                                <br />
+                                <div class="input-group mb-3">
+                                    <span class="input-group-text">$5</span>
+                                    <a asp-controller="User" asp-action="AddMoneyToWallet" asp-route-userId="@Model.Id" asp-route-amount="5" class="btn btn-success btn-lg">Add funds</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="card mb-3">
+                    <div class="row g-0">
+                        <div class="col-md-4">
+                            <div class="card-body">
+                                <br />
+                                <h3><b>Add 10,--$</b></h3>
+                            </div>
+                        </div>
+                        <div class="col-md-8">
+                            <div class="card-body">
+                                <br />
+                                <div class="input-group mb-3">
+                                    <span class="input-group-text">$10</span>
+                                    <a asp-controller="User" asp-action="AddMoneyToWallet" asp-route-userId="@Model.Id" asp-route-amount="10" class="btn btn-success btn-lg">Add funds</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="card mb-3">
+                    <div class="row g-0">
+                        <div class="col-md-4">
+                            <div class="card-body">
+                                <br />
+                                <h3><b>Add 25,--$</b></h3>
+                            </div>
+                        </div>
+                        <div class="col-md-8">
+                            <div class="card-body">
+                                <br />
+                                <div class="input-group mb-3">
+                                    <span class="input-group-text">$25</span>
+                                    <a asp-controller="User" asp-action="AddMoneyToWallet" asp-route-userId="@Model.Id" asp-route-amount="25" class="btn btn-success btn-lg">Add funds</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="card mb-3">
+                    <div class="row g-0">
+                        <div class="col-md-4">
+                            <div class="card-body">
+                                <br />
+                                <h3><b>Add 50,--$</b></h3>
+                            </div>
+                        </div>
+                        <div class="col-md-8">
+                            <div class="card-body">
+                                <br />
+                                <div class="input-group mb-3">
+                                    <span class="input-group-text">$50</span>
+                                    <a asp-controller="User" asp-action="AddMoneyToWallet" asp-route-userId="@Model.Id" asp-route-amount="50" class="btn btn-success btn-lg">Add funds</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="card mb-3">
+                    <div class="row g-0">
+                        <div class="col-md-4">
+                            <div class="card-body">
+                                <br />
+                                <h3><b>Add 100,--$</b></h3>
+                            </div>
+                        </div>
+                        <div class="col-md-8">
+                            <div class="card-body">
+                                <br />
+                                <div class="input-group mb-3">
+                                    <span class="input-group-text">$100</span>
+                                    <a asp-controller="User" asp-action="AddMoneyToWallet" asp-route-userId="@Model.Id" asp-route-amount="100" class="btn btn-success btn-lg">Add funds</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+
+            </div>
+
+        </div>
+    </section>
+
+</main>

@@ -15,5 +15,7 @@ namespace VideoGamesShop.Core.Contracts
         Task<ApplicationUser> GetUserById(string id);
 
         Task<UserProfileViewModel> GetUserProfileInfo(string id);
+
+        Task AddMoneyToWallet(string userId, decimal amount);
     }
 }
