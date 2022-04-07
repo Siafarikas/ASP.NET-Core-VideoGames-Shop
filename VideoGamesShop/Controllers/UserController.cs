@@ -46,5 +46,19 @@ namespace VideoGamesShop.Controllers
             return View(user);
         }
 
+        public async Task<IActionResult> MyWallet(string userId)
+        {
+            var user = await userService.GetUserById(userId);
+
+            return View(user);
+        }
+
+        public async Task<IActionResult> AddMoneyToWallet(string userId, decimal amount)
+        {
+            await userService.AddMoneyToWallet(userId, amount);
+
+            return RedirectToAction("MyWallet", "User", new { userId = userId });
+        }
+
     }
 }
