@@ -3,6 +3,7 @@ using VideoGamesShop.Core.Contracts;
 using VideoGamesShop.Core.Models.User;
 using VideoGamesShop.Core.User.Models;
 using VideoGamesShop.Infrastructure.Data.Identity;
+using VideoGamesShop.Infrastructure.Data.Models;
 using VideoGamesShop.Infrastructure.Data.Repositories;
 
 namespace VideoGamesShop.Core.Services
@@ -80,6 +81,17 @@ namespace VideoGamesShop.Core.Services
             user.Wallet += amount;
 
             await repo.SaveChangesAsync();
+        }
+
+        public async Task<string> GetDeveloperIdByUserId(string userId)
+        {
+            var user = await repo.GetByIdAsync<ApplicationUser>(userId);
+
+            var dev = await repo.All<Developer>()
+                .Where(d => d.UserId == userId)
+                .FirstOrDefaultAsync();
+
+            return dev.Id;
         }
 
     }

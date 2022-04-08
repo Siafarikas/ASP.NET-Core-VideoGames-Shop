@@ -13,5 +13,12 @@ namespace VideoGamesShop.Core.Contracts
         Task<IEnumerable<GameListViewModel>> GetGames();
 
         Task<GameDetailsViewModel> GameDetails(string gameId);
+
+        Task<IEnumerable<GameLibraryViewModel>> GetUsersGames(string userId);
+
+        Task<bool> AddGame(string title, string genreId, decimal price, string releaseDate, string description, string imageUrl, string developerId);
+
+        Task<IEnumerable<GameGenreModel>> GetAllGenres();
+
     }
 }
