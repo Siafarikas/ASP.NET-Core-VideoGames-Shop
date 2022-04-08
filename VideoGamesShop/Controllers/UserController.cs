@@ -34,16 +34,6 @@ namespace VideoGamesShop.Controllers
             return View();
         }
 
-        public async Task<IActionResult> GetUserInfo()
-        {
-            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier); // will give the user's userId
-            var userName = User.FindFirstValue(ClaimTypes.Name); // will give the user's userName
-
-            ApplicationUser applicationUser = await userManager.GetUserAsync(User);
-
-            return View();
-        }
-
         public async Task<IActionResult> Profile(string userId)
         {
             if (User.Id() != userId)
@@ -83,6 +73,18 @@ namespace VideoGamesShop.Controllers
             return View(games);
         }
 
+        public async Task<IActionResult> BecomeDeveloper(string userId)
+        {
+            if (await userService.UserBecomesDeveloper(userId))
+            {
+                return Redirect("~/");
+
+            }
+            else
+            {
+                return RedirectToAction("404", "Error");
+            }
+        }
         /*public async Task<IActionResult> CreateRole()
         {
             await roleManager.CreateAsync(new IdentityRole()
