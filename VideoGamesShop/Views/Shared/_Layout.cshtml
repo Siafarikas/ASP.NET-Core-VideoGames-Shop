@@ -3,20 +3,9 @@
 @using VideoGamesShop.Extensions
 @using VideoGamesShop.Infrastructure.Data.Identity
 @using static VideoGamesShop.Core.Constants.UserConstants
-@inject UserManager<ApplicationUser> UserManager
-@inject SignInManager<ApplicationUser> SignInManager
+@inject UserManager<ApplicationUser> userManager
+@inject SignInManager<ApplicationUser> signInManager
 
-@{
-    ApplicationUser user = new ApplicationUser()
-            {
-                FirstName = "null",
-                LastName = "null"
-            };
-    @if (SignInManager.IsSignedIn(User))
-    {
-        user = await UserManager.GetUserAsync(User);
-    }
-}
 <!DOCTYPE html>
 <html lang="en">
 
@@ -95,78 +84,13 @@
                         <span class="badge bg-danger badge-number">4</span>
                     </a><!-- End Notification Icon -->
 
-                    <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow notifications">
-                        <li class="dropdown-header">
-                            You have 4 new notifications
-                            <a href="#"><span class="badge rounded-pill bg-primary p-2 ms-2">View all</span></a>
-                        </li>
-                        <li>
-                            <hr class="dropdown-divider">
-                        </li>
-
-                        <li class="notification-item">
-                            <i class="bi bi-exclamation-circle text-warning"></i>
-                            <div>
-                                <h4>Lorem Ipsum</h4>
-                                <p>Quae dolorem earum veritatis oditseno</p>
-                                <p>30 min. ago</p>
-                            </div>
-                        </li>
-
-                        <li>
-                            <hr class="dropdown-divider">
-                        </li>
-
-                        <li class="notification-item">
-                            <i class="bi bi-x-circle text-danger"></i>
-                            <div>
-                                <h4>Atque rerum nesciunt</h4>
-                                <p>Quae dolorem earum veritatis oditseno</p>
-                                <p>1 hr. ago</p>
-                            </div>
-                        </li>
-
-                        <li>
-                            <hr class="dropdown-divider">
-                        </li>
-
-                        <li class="notification-item">
-                            <i class="bi bi-check-circle text-success"></i>
-                            <div>
-                                <h4>Sit rerum fuga</h4>
-                                <p>Quae dolorem earum veritatis oditseno</p>
-                                <p>2 hrs. ago</p>
-                            </div>
-                        </li>
-
-                        <li>
-                            <hr class="dropdown-divider">
-                        </li>
-
-                        <li class="notification-item">
-                            <i class="bi bi-info-circle text-primary"></i>
-                            <div>
-                                <h4>Dicta reprehenderit</h4>
-                                <p>Quae dolorem earum veritatis oditseno</p>
-                                <p>4 hrs. ago</p>
-                            </div>
-                        </li>
-
-                        <li>
-                            <hr class="dropdown-divider">
-                        </li>
-                        <li class="dropdown-footer">
-                            <a href="#">Show all notifications</a>
-                        </li>
-
-                    </ul><!-- End Notification Dropdown Items -->
 
                 </li><!-- End Notification Nav -->
 
                 <li class="nav-item">
-                    @if (User.Identity.IsAuthenticated && !(User.IsInRole(Roles.Developer)))
+                    @if (User.Identity.IsAuthenticated && !(User.IsDeveloper()))
                     {
-                        <a asp-controller="Cart" asp-action="MyCart" asp-route-userId="@User.Id()" class="nav-link">Become developer</a>
+                        <a asp-controller="User" asp-action="BecomeDeveloper" asp-route-userId="@User.Id()" class="nav-link">Become developer</a>
                     }
 
                 </li>
@@ -189,13 +113,13 @@
                         <li class="dropdown-header">
                             @if (User.Identity.IsAuthenticated)
                             {
-                                <h6>@User.Identity.Name</h6>
+                                <h6>@userManager.GetUserAsync(User).Result.FirstName @userManager.GetUserAsync(User).Result.LastName</h6>
                             }
-                            @if (@User.IsInRole(Roles.Administrator))
+                            @if (@User.IsAdmin())
                             {
                                 <span>Admin</span>
                             }
-                            else if (@User.IsInRole(Roles.Developer))
+                            else if (@User.IsDeveloper())
                             {
                                 <span>Developer</span>
                             }
@@ -297,7 +221,8 @@
                 <li class="nav-heading">Developer Tools</li>
 
                 <li class="nav-item">
-                    <a class="nav-link" href="~/store/games">
+                    <a class="nav-link"
+                   asp-controller="Developer" asp-action="Dashboard" asp-route-userId="@User.Id()">
                         <i class="bi bi-grid"></i>
                         <span>Dashboard</span>
                     </a>

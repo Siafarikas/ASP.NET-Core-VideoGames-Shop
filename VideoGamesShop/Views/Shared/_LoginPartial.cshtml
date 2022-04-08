@@ -1,24 +1,13 @@
 ﻿@using Microsoft.AspNetCore.Identity
 @using System.Security.Claims
+@using VideoGamesShop.Extensions
 @using VideoGamesShop.Infrastructure.Data.Identity
-@inject SignInManager<ApplicationUser> SignInManager
-@inject UserManager<ApplicationUser> UserManager
-@{
-    ApplicationUser user = new ApplicationUser()
-    {
-        FirstName = "bug",
-        LastName = "bugger"
-    };
-    @if (SignInManager.IsSignedIn(User))
-    {
-        user = await UserManager.GetUserAsync(User);
-    }
- }
+@inject UserManager<ApplicationUser> userManager;
 
-@if (SignInManager.IsSignedIn(User))
+@if (User.Identity.IsAuthenticated)
 {
     <a class="nav-link nav-profile d-flex align-items-center pe-0" href="#" data-bs-toggle="dropdown">
         <img src="~/assets/img/profile-img.jpg" alt="Profile" class="rounded-circle">
-        <span class="d-none d-md-block dropdown-toggle ps-2">@User.Identity.Name</span>
+        <span class="d-none d-md-block dropdown-toggle ps-2">@userManager.GetUserAsync(User).Result.FirstName[0]. @userManager.GetUserAsync(User).Result.LastName</span>
     </a>
 }
