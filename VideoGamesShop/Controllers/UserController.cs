@@ -14,15 +14,19 @@ namespace VideoGamesShop.Controllers
 
         private readonly IUserService userService;
 
+        private readonly IGameService gameService;
+
         public UserController(
             RoleManager<IdentityRole> _roleManager,
             UserManager<ApplicationUser> _userManager,
-            IUserService _userService
+            IUserService _userService,
+            IGameService _gameService
             )
         {
             roleManager = _roleManager;
             userManager = _userManager;
             userService = _userService;
+            gameService = _gameService;
         }
         public IActionResult Index()
         {
@@ -60,5 +64,20 @@ namespace VideoGamesShop.Controllers
             return RedirectToAction("MyWallet", "User", new { userId = userId });
         }
 
+        public async Task<IActionResult> MyLibrary(string userId)
+        {
+            var games = await gameService.GetUsersGames(userId);
+            return View(games);
+        }
+
+        /*public async Task<IActionResult> CreateRole()
+        {
+            await roleManager.CreateAsync(new IdentityRole()
+            {
+                Name = "Developer"
+            });
+
+            return Ok();
+        }*/
     }
 }
