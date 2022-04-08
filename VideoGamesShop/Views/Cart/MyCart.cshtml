@@ -140,8 +140,8 @@
                                     <span><strong>$@Model.Sum(g => g.Price)</strong></span>
                                 </li>
                             </ul>
-
-                            <a asp-controller="Cart" asp-action="Buy" asp-route-userId="@User.Id()" class="btn btn-primary">Buy</i></a>
+                            <a href="~/store/games" class="btn btn-primary">Continue Shopping</i></a>
+                            <a asp-controller="Cart" asp-action="Buy" asp-route-userId="@User.Id()" class="btn btn-success">Buy</i></a>
                         </div>
                     </div>
                     <!-- Card -->
