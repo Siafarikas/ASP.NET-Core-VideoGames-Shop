@@ -1,6 +1,7 @@
-﻿using System;
+﻿  using System;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using VideoGamesShop.Infrastructure.Data.Identity;
 
 namespace VideoGamesShop.Infrastructure.Data.Models
 {
@@ -12,7 +13,7 @@ namespace VideoGamesShop.Infrastructure.Data.Models
 
 
         [Required]
-        [MinLength(GameTitleMinLength), MaxLength(GameTitleMaxLength)]
+        [StringLength(GameTitleMaxLength, MinimumLength = GameTitleMinLength)]
         public string Title { get; set; }
 
         [Required]
@@ -34,17 +35,19 @@ namespace VideoGamesShop.Infrastructure.Data.Models
         public int? Sales { get; init; } = 0;
 
 
-        public string DeveloperId { get; set; }
+        public string DeveloperId { get; init; }
 
         [ForeignKey(nameof(DeveloperId))]
         public Developer Developer { get; set; }
 
 
-        public string GenreId { get; set; } 
+        public string GenreId { get; set; }
 
         [ForeignKey(nameof(GenreId))]
         public Genre Genre { get; set; }
 
+
+        public virtual ICollection<Purchase> Users { get; set; } = new List<Purchase>();
 
         public IList<Tag> Tags { get; set; } = new List<Tag>();
 

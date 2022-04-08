@@ -11,11 +11,13 @@
         public const int GameTitleMinLength = 3;
         public const int GameTitleMaxLength = 50;
 
+        public const double GameMinPrice = 0.00;
+        public const double GameMaxPrice = 99.99;
+
+
 
         public const int GenreMinLength = 3;
         public const int GenreMaxLength = 50;
-
-        public const int GenreDescMaxLength = 250;
 
 
         public const int TagMaxLength = 50;

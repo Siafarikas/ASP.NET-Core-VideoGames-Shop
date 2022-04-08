@@ -19,7 +19,6 @@ namespace VideoGamesShop.Infrastructure.Data.Models
         [Required]
         public DateOnly? DateTo { get; set; } */
 
-        public IList<Game> Games { get; set; } = new List<Game>();
     }
 
 }

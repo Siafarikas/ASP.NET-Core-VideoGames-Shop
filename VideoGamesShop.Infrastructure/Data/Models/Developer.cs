@@ -11,6 +11,8 @@ namespace VideoGamesShop.Infrastructure.Data.Models
 
         public string LastName { get; set; }
 
-        public IList<Game> Games { get; set; } = new List<Game>();
+        public IList<Game> PublishedGames { get; init; } = new List<Game>();
+
+        public string UserId { get; set; }
     }
 }

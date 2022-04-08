@@ -6,11 +6,11 @@
 @inject SignInManager<ApplicationUser> SignInManager
 
 @{
-     ApplicationUser user = new ApplicationUser()
-    {
-        FirstName = "null",
-        LastName = "null"
-    };
+    ApplicationUser user = new ApplicationUser()
+            {
+                FirstName = "null",
+                LastName = "null"
+            };
     @if (SignInManager.IsSignedIn(User))
     {
         user = await UserManager.GetUserAsync(User);
@@ -163,12 +163,19 @@
                 </li><!-- End Notification Nav -->
 
                 <li class="nav-item">
+                    @if (User.Identity.IsAuthenticated && !(User.IsInRole(Roles.Developer)))
+                    {
+                        <a asp-controller="Cart" asp-action="MyCart" asp-route-userId="@User.FindFirst(ClaimTypes.NameIdentifier).Value" class="nav-link">Become developer</a>
+                    }
+
+                </li>
+
+                <li class="nav-item">
                     @if (User.Identity.IsAuthenticated)
                     {
                         <a asp-controller="Cart" asp-action="MyCart" asp-route-userId="@User.FindFirst(ClaimTypes.NameIdentifier).Value" class="nav-link"><i class="bi bi-cart2"></i></a>
                     }
 
-                    <!-- End Messages Icon -->
                 </li>
 
                 <!-- End Messages Nav -->
@@ -179,7 +186,10 @@
 
                     <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile">
                         <li class="dropdown-header">
-                            <h6>@user.FirstName @user.LastName</h6>
+                            @if (User.Identity.IsAuthenticated)
+                            {
+                                <h6>@User.Identity.Name</h6>
+                            }
                             @if (@User.IsInRole(Roles.Administrator))
                             {
                                 <span>Admin</span>
@@ -210,7 +220,7 @@
                         </li>
 
                         <li>
-                              @if (User.Identity.IsAuthenticated)
+                            @if (User.Identity.IsAuthenticated)
                             {
                                 <a class="dropdown-item d-flex align-items-center" asp-controller="User" asp-action="MyWallet" asp-route-userId="@User.FindFirst(ClaimTypes.NameIdentifier).Value">
                                     <i class="bi bi-wallet2"></i>My Wallet
@@ -269,10 +279,15 @@
             </li>
 
             <li class="nav-item">
-                <a class="nav-link " href="/">
-                    <i class="bi bi-controller"></i>
-                    <span>Library</span>
-                </a>
+                @if (User.Identity.IsAuthenticated)
+                {
+                    <a class="nav-link"
+                   asp-controller="User" asp-action="MyLibrary" asp-route-userId="@User.FindFirst(ClaimTypes.NameIdentifier).Value">
+                        <i class="bi bi-controller"></i>
+                        <span>Library</span>
+                    </a>
+                }
+
             </li>
 
             @if (@User.IsInRole("Developer"))
@@ -288,7 +303,7 @@
                 </li>
 
                 <li class="nav-item">
-                    <a class="nav-link" href="~/store/games">
+                    <a class="nav-link" href="~/developer/addgame">
                         <i class="ri ri-gamepad-line"></i>
                         <span>Publish Game</span>
                     </a>

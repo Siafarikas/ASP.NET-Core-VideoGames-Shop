@@ -16,6 +16,6 @@ namespace VideoGamesShop.Infrastructure.Data.Identity
 
         public decimal Wallet { get; set; }
 
-        public IList<Game> Games { get; set; } = new List<Game>();
+        public virtual ICollection<Purchase> Games { get; set; } = new List<Purchase>();
     }
 }
