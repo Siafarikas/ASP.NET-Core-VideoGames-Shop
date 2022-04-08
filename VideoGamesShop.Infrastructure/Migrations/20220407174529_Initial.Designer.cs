@@ -12,8 +12,8 @@ using VideoGamesShop.Infrastructure.Data;
 namespace VideoGamesShop.Infrastructure.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20220405210540_FirstLastNameAdded")]
-    partial class FirstLastNameAdded
+    [Migration("20220407174529_Initial")]
+    partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -23,6 +23,21 @@ namespace VideoGamesShop.Infrastructure.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
+
+            modelBuilder.Entity("ApplicationUserGame", b =>
+                {
+                    b.Property<string>("GamesId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("UsersId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("GamesId", "UsersId");
+
+                    b.HasIndex("UsersId");
+
+                    b.ToTable("ApplicationUserGame");
+                });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
                 {
@@ -252,6 +267,10 @@ namespace VideoGamesShop.Infrastructure.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("UserId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.HasKey("Id");
 
                     b.ToTable("Developers");
@@ -353,6 +372,21 @@ namespace VideoGamesShop.Infrastructure.Migrations
                     b.ToTable("Tags");
                 });
 
+            modelBuilder.Entity("ApplicationUserGame", b =>
+                {
+                    b.HasOne("VideoGamesShop.Infrastructure.Data.Models.Game", null)
+                        .WithMany()
+                        .HasForeignKey("GamesId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("VideoGamesShop.Infrastructure.Data.Identity.ApplicationUser", null)
+                        .WithMany()
+                        .HasForeignKey("UsersId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
                 {
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole", null)
@@ -407,13 +441,13 @@ namespace VideoGamesShop.Infrastructure.Migrations
             modelBuilder.Entity("VideoGamesShop.Infrastructure.Data.Models.Game", b =>
                 {
                     b.HasOne("VideoGamesShop.Infrastructure.Data.Models.Developer", "Developer")
-                        .WithMany("Games")
+                        .WithMany("PublishedGames")
                         .HasForeignKey("DeveloperId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("VideoGamesShop.Infrastructure.Data.Models.Genre", "Genre")
-                        .WithMany("Games")
+                        .WithMany()
                         .HasForeignKey("GenreId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -443,17 +477,12 @@ namespace VideoGamesShop.Infrastructure.Migrations
 
             modelBuilder.Entity("VideoGamesShop.Infrastructure.Data.Models.Developer", b =>
                 {
-                    b.Navigation("Games");
+                    b.Navigation("PublishedGames");
                 });
 
             modelBuilder.Entity("VideoGamesShop.Infrastructure.Data.Models.Game", b =>
                 {
                     b.Navigation("Tags");
-                });
-
-            modelBuilder.Entity("VideoGamesShop.Infrastructure.Data.Models.Genre", b =>
-                {
-                    b.Navigation("Games");
                 });
 #pragma warning restore 612, 618
         }

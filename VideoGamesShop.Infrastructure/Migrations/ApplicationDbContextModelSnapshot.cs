@@ -250,17 +250,18 @@ namespace VideoGamesShop.Infrastructure.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("UserId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.HasKey("Id");
 
-                    b.ToTable("Developers", (string)null);
+                    b.ToTable("Developers");
                 });
 
             modelBuilder.Entity("VideoGamesShop.Infrastructure.Data.Models.Game", b =>
                 {
                     b.Property<string>("Id")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<string>("ApplicationUserId")
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("Description")
@@ -297,13 +298,11 @@ namespace VideoGamesShop.Infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("ApplicationUserId");
-
                     b.HasIndex("DeveloperId");
 
                     b.HasIndex("GenreId");
 
-                    b.ToTable("Games", (string)null);
+                    b.ToTable("Games");
                 });
 
             modelBuilder.Entity("VideoGamesShop.Infrastructure.Data.Models.Genre", b =>
@@ -318,7 +317,7 @@ namespace VideoGamesShop.Infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Genres", (string)null);
+                    b.ToTable("Genres");
                 });
 
             modelBuilder.Entity("VideoGamesShop.Infrastructure.Data.Models.Item", b =>
@@ -333,7 +332,22 @@ namespace VideoGamesShop.Infrastructure.Migrations
 
                     b.HasIndex("GameId");
 
-                    b.ToTable("CartItems", (string)null);
+                    b.ToTable("CartItems");
+                });
+
+            modelBuilder.Entity("VideoGamesShop.Infrastructure.Data.Models.Purchase", b =>
+                {
+                    b.Property<string>("UserId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("GameId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("UserId", "GameId");
+
+                    b.HasIndex("GameId");
+
+                    b.ToTable("Purchases");
                 });
 
             modelBuilder.Entity("VideoGamesShop.Infrastructure.Data.Models.Tag", b =>
@@ -353,7 +367,7 @@ namespace VideoGamesShop.Infrastructure.Migrations
 
                     b.HasIndex("GameId");
 
-                    b.ToTable("Tags", (string)null);
+                    b.ToTable("Tags");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -409,18 +423,14 @@ namespace VideoGamesShop.Infrastructure.Migrations
 
             modelBuilder.Entity("VideoGamesShop.Infrastructure.Data.Models.Game", b =>
                 {
-                    b.HasOne("VideoGamesShop.Infrastructure.Data.Identity.ApplicationUser", null)
-                        .WithMany("Games")
-                        .HasForeignKey("ApplicationUserId");
-
                     b.HasOne("VideoGamesShop.Infrastructure.Data.Models.Developer", "Developer")
-                        .WithMany("Games")
+                        .WithMany("PublishedGames")
                         .HasForeignKey("DeveloperId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("VideoGamesShop.Infrastructure.Data.Models.Genre", "Genre")
-                        .WithMany("Games")
+                        .WithMany()
                         .HasForeignKey("GenreId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -441,6 +451,25 @@ namespace VideoGamesShop.Infrastructure.Migrations
                     b.Navigation("Game");
                 });
 
+            modelBuilder.Entity("VideoGamesShop.Infrastructure.Data.Models.Purchase", b =>
+                {
+                    b.HasOne("VideoGamesShop.Infrastructure.Data.Models.Game", "Game")
+                        .WithMany("Users")
+                        .HasForeignKey("GameId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("VideoGamesShop.Infrastructure.Data.Identity.ApplicationUser", "User")
+                        .WithMany("Games")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Game");
+
+                    b.Navigation("User");
+                });
+
             modelBuilder.Entity("VideoGamesShop.Infrastructure.Data.Models.Tag", b =>
                 {
                     b.HasOne("VideoGamesShop.Infrastructure.Data.Models.Game", null)
@@ -455,17 +484,14 @@ namespace VideoGamesShop.Infrastructure.Migrations
 
             modelBuilder.Entity("VideoGamesShop.Infrastructure.Data.Models.Developer", b =>
                 {
-                    b.Navigation("Games");
+                    b.Navigation("PublishedGames");
                 });
 
             modelBuilder.Entity("VideoGamesShop.Infrastructure.Data.Models.Game", b =>
                 {
                     b.Navigation("Tags");
-                });
 
-            modelBuilder.Entity("VideoGamesShop.Infrastructure.Data.Models.Genre", b =>
-                {
-                    b.Navigation("Games");
+                    b.Navigation("Users");
                 });
 #pragma warning restore 612, 618
         }
