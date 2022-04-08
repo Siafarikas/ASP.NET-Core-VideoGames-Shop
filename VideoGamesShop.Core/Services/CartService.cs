@@ -32,6 +32,11 @@ namespace VideoGamesShop.Core.Services
 
             if (product == null) return false;
 
+            var productOwned = await repo.All<Purchase>()
+                .Where(p => p.UserId == user.Id)
+                .AnyAsync(p => p.GameId == product.Id);
+
+            if (productOwned) return false;
 
 
             bool itemInCart = await repo.All<Item>()
@@ -121,8 +126,13 @@ namespace VideoGamesShop.Core.Services
 
             foreach (var item in items)
             {
-                user.Games.Add(item.Game);
+                Purchase purchase = new Purchase()
+                {
+                    UserId = item.UserId,
+                    GameId = item.GameId
+                };
 
+                user.Games.Add(purchase);
                 repo.Delete(item);
             }
 
