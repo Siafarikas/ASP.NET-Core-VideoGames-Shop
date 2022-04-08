@@ -51,6 +51,10 @@ namespace VideoGamesShop.Controllers
         [Authorize]
         public async Task<IActionResult> GameDetails(string gameId)
         {
+            if (!(await gameService.GameWithIdExists(gameId)))
+            {
+                return RedirectToAction("404", "Error");
+            }
             var game = await gameService.GameDetails(gameId);
 
             return View(game);

@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using System.Security.Claims;
 using VideoGamesShop.Core.Contracts;
+using VideoGamesShop.Extensions;
 using VideoGamesShop.Infrastructure.Data.Identity;
 
 namespace VideoGamesShop.Controllers
@@ -45,6 +46,10 @@ namespace VideoGamesShop.Controllers
 
         public async Task<IActionResult> Profile(string userId)
         {
+            if (User.Id() != userId)
+            {
+                return RedirectToAction("404", "Error");
+            }
             var user = await userService.GetUserProfileInfo(userId);
 
             return View(user);
@@ -52,6 +57,10 @@ namespace VideoGamesShop.Controllers
 
         public async Task<IActionResult> MyWallet(string userId)
         {
+            if (User.Id() != userId)
+            {
+                return RedirectToAction("404", "Error");
+            }
             var user = await userService.GetUserById(userId);
 
             return View(user);
@@ -66,6 +75,10 @@ namespace VideoGamesShop.Controllers
 
         public async Task<IActionResult> MyLibrary(string userId)
         {
+            if (User.Id() != userId)
+            {
+                return RedirectToAction("404", "Error");
+            }
             var games = await gameService.GetUsersGames(userId);
             return View(games);
         }

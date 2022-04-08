@@ -1,5 +1,6 @@
 ﻿@using System.Security.Claims
 @using Microsoft.AspNetCore.Identity
+@using VideoGamesShop.Extensions
 @using VideoGamesShop.Infrastructure.Data.Identity
 @using static VideoGamesShop.Core.Constants.UserConstants
 @inject UserManager<ApplicationUser> UserManager
@@ -165,7 +166,7 @@
                 <li class="nav-item">
                     @if (User.Identity.IsAuthenticated && !(User.IsInRole(Roles.Developer)))
                     {
-                        <a asp-controller="Cart" asp-action="MyCart" asp-route-userId="@User.FindFirst(ClaimTypes.NameIdentifier).Value" class="nav-link">Become developer</a>
+                        <a asp-controller="Cart" asp-action="MyCart" asp-route-userId="@User.Id()" class="nav-link">Become developer</a>
                     }
 
                 </li>
@@ -173,7 +174,7 @@
                 <li class="nav-item">
                     @if (User.Identity.IsAuthenticated)
                     {
-                        <a asp-controller="Cart" asp-action="MyCart" asp-route-userId="@User.FindFirst(ClaimTypes.NameIdentifier).Value" class="nav-link"><i class="bi bi-cart2"></i></a>
+                        <a asp-controller="Cart" asp-action="MyCart" asp-route-userId="@User.Id()" class="nav-link"><i class="bi bi-cart2"></i></a>
                     }
 
                 </li>
@@ -210,7 +211,7 @@
                         <li>
                             @if (User.Identity.IsAuthenticated)
                             {
-                                <a class="dropdown-item d-flex align-items-center" asp-controller="User" asp-action="Profile" asp-route-userId="@User.FindFirst(ClaimTypes.NameIdentifier).Value">
+                                <a class="dropdown-item d-flex align-items-center" asp-controller="User" asp-action="Profile" asp-route-userId="@User.Id()">
                                     <i class="bi bi-person"></i>My Profile
                                 </a>
                             }
@@ -222,7 +223,7 @@
                         <li>
                             @if (User.Identity.IsAuthenticated)
                             {
-                                <a class="dropdown-item d-flex align-items-center" asp-controller="User" asp-action="MyWallet" asp-route-userId="@User.FindFirst(ClaimTypes.NameIdentifier).Value">
+                                <a class="dropdown-item d-flex align-items-center" asp-controller="User" asp-action="MyWallet" asp-route-userId="@User.Id()">
                                     <i class="bi bi-wallet2"></i>My Wallet
                                 </a>
                             }
@@ -282,7 +283,7 @@
                 @if (User.Identity.IsAuthenticated)
                 {
                     <a class="nav-link"
-                   asp-controller="User" asp-action="MyLibrary" asp-route-userId="@User.FindFirst(ClaimTypes.NameIdentifier).Value">
+                   asp-controller="User" asp-action="MyLibrary" asp-route-userId="@User.Id()">
                         <i class="bi bi-controller"></i>
                         <span>Library</span>
                     </a>

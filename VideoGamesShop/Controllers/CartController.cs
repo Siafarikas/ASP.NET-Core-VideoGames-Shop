@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using VideoGamesShop.Core.Contracts;
+using VideoGamesShop.Extensions;
 
 namespace VideoGamesShop.Controllers
 {
@@ -16,6 +17,10 @@ namespace VideoGamesShop.Controllers
         [Authorize]
         public async Task<IActionResult> MyCart(string userId)
         {
+            if (User.Id() != userId)
+            {
+                return RedirectToAction("404", "Error");
+            }
             var productsInCart = await cartService.UsersCart(userId);
 
             return View(productsInCart);

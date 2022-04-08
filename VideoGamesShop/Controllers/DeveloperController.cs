@@ -50,7 +50,7 @@ namespace VideoGamesShop.Controllers
                 developerId
                 );
 
-            //TempData[GlobalMessageKey] = "You car was added and is awaiting for approval!";
+            //TempData[GlobalMessageKey] = "Successfully published game!";
 
             return Redirect("~/store/games");
         }

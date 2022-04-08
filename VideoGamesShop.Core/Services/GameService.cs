@@ -115,5 +115,11 @@ namespace VideoGamesShop.Core.Services
                 })
                 .ToListAsync();
         }
+
+        public async Task<bool> GameWithIdExists(string gameId) 
+        {
+            return await repo.All<Game>()
+                .AnyAsync(g => g.Id == gameId);
+        }
     }
 }

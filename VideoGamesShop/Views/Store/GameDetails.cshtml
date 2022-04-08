@@ -1,5 +1,6 @@
 ﻿@using System.Security.Claims
 @using VideoGamesShop.Core.Models.Game
+@using VideoGamesShop.Extensions
 @model GameDetailsViewModel
 @{
     ViewData["Title"] = "GameDetails";
@@ -72,7 +73,7 @@
                             </table>
                         </div>
                         <hr>
-                        <a asp-controller="Store" asp-action="AddToCart" asp-route-userId="@User.FindFirst(ClaimTypes.NameIdentifier).Value" asp-route-gameId="@Model.GameId" class="btn btn-primary"><i class="bi bi-cart2 me-1"></i>Add to Cart</a>
+                        <a asp-controller="Store" asp-action="AddToCart" asp-route-userId="@User.Id()" asp-route-gameId="@Model.GameId" class="btn btn-primary"><i class="bi bi-cart2 me-1"></i>Add to Cart</a>
                         <a href="#!" type="button" class="card-link-secondary small text-uppercase"><i class="fas fa-heart mr-1"></i> Move to wish list </a>
                     </div>
                 </div>

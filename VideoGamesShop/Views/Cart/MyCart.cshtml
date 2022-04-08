@@ -1,5 +1,6 @@
 ﻿@using System.Security.Claims
 @using VideoGamesShop.Core.Models.Cart
+@using VideoGamesShop.Extensions
 @model IEnumerable<CartItemViewModel>
 @{
     ViewData["Title"] = "MyCart";
@@ -52,9 +53,9 @@
                     <div class="card wish-list mb-4">
                         <div class="card-body">
                             <br>
-                            <h5 class="mb-4">Cart (<span>@Model.Select(p => p.UserId == @User.FindFirst(ClaimTypes.NameIdentifier).Value).Count()</span> items)</h5>
+                            <h5 class="mb-4">Cart (<span>@Model.Select(p => p.UserId == @User.Id()).Count()</span> items)</h5>
 
-                            @if (@Model.Select(p => p.UserId == @User.FindFirst(ClaimTypes.NameIdentifier).Value).Count() == 0)
+                            @if (@Model.Select(p => p.UserId == @User.Id()).Count() == 0)
                             {
                                <center> No games in cart - <a class="nav-link" href="~/store/games"><span>Go To Store</span></a></center>
                                <br />
@@ -79,7 +80,7 @@
                                             <div class="d-flex justify-content-between align-items-center">
                                                 <div>
                                                     <a asp-controller="Store" asp-action="GameDetails" asp-route-gameId="@game.GameId" class="btn btn-secondary"><i class="bi bi-info-circle me-1"> Details</i></a>
-                                                    <a asp-controller="Cart" asp-action="RemoveFromCart" asp-route-userId="@User.FindFirst(ClaimTypes.NameIdentifier).Value" asp-route-gameId="@game.GameId" class="btn btn-danger"> <i class="bi bi-trash me-1"></i> Remove</a>
+                                                    <a asp-controller="Cart" asp-action="RemoveFromCart" asp-route-userId="@User.Id()" asp-route-gameId="@game.GameId" class="btn btn-danger"> <i class="bi bi-trash me-1"></i> Remove</a>
                                                     <a href="#!" type="button" class="card-link-secondary small text-uppercase"><i class="fas fa-heart mr-1"></i> Move to wish list </a>
                                                 </div>
                                                 <p class="mb-0"><span><strong>$@game.Price</strong></span></p>
@@ -140,7 +141,7 @@
                                 </li>
                             </ul>
 
-                            <a asp-controller="Cart" asp-action="Buy" asp-route-userId="@User.FindFirst(ClaimTypes.NameIdentifier).Value" class="btn btn-primary">Buy</i></a>
+                            <a asp-controller="Cart" asp-action="Buy" asp-route-userId="@User.Id()" class="btn btn-primary">Buy</i></a>
                         </div>
                     </div>
                     <!-- Card -->

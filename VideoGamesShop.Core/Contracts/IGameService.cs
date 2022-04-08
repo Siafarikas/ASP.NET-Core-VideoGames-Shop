@@ -20,5 +20,7 @@ namespace VideoGamesShop.Core.Contracts
 
         Task<IEnumerable<GameGenreModel>> GetAllGenres();
 
+        Task<bool> GameWithIdExists(string gameId);
+
     }
 }
