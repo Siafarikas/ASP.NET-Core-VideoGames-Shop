@@ -1,4 +1,5 @@
-﻿using VideoGamesShop.Core.Models.User;
+﻿using VideoGamesShop.Core.Models.Developer;
+using VideoGamesShop.Core.Models.User;
 using VideoGamesShop.Core.User.Models;
 using VideoGamesShop.Infrastructure.Data.Identity;
 
@@ -19,5 +20,9 @@ namespace VideoGamesShop.Core.Contracts
         Task AddMoneyToWallet(string userId, decimal amount);
 
         Task<string> GetDeveloperIdByUserId(string userId);
+
+        Task<bool> UserBecomesDeveloper(string userId);
+
+        Task<StatisticsPageViewModel> GetStatistics(string userId);
     }
 }

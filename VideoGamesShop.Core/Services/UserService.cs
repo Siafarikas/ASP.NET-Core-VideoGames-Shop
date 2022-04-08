@@ -1,5 +1,7 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 using VideoGamesShop.Core.Contracts;
+using VideoGamesShop.Core.Models.Developer;
 using VideoGamesShop.Core.Models.User;
 using VideoGamesShop.Core.User.Models;
 using VideoGamesShop.Infrastructure.Data.Identity;
@@ -11,10 +13,17 @@ namespace VideoGamesShop.Core.Services
     public class UserService : IUserService
     {
         private readonly IApplicatioDbRepo repo;
+        private readonly RoleManager<IdentityRole> roleManager;
 
-        public UserService(IApplicatioDbRepo _repo)
+        private readonly UserManager<ApplicationUser> userManager;
+        public UserService(
+            IApplicatioDbRepo _repo,
+            RoleManager<IdentityRole> _roleManager,
+            UserManager<ApplicationUser> _userManager)
         {
             repo = _repo;
+            roleManager = _roleManager;
+            userManager = _userManager;
         }
 
         public async Task<ApplicationUser> GetUserById(string id)
@@ -36,7 +45,7 @@ namespace VideoGamesShop.Core.Services
         {
             return await repo.All<ApplicationUser>()
                 .Select(u => new UserListViewModel()
-                { 
+                {
                     Id = u.Id,
                     Email = u.Email,
                     Name = $"{u.FirstName} {u.LastName}"
@@ -92,6 +101,65 @@ namespace VideoGamesShop.Core.Services
                 .FirstOrDefaultAsync();
 
             return dev.Id;
+        }
+
+        public async Task<bool> UserBecomesDeveloper(string userId)
+        {
+            if (userId == null)
+            {
+                return false;
+            }
+
+            var user = await repo.GetByIdAsync<ApplicationUser>(userId);
+
+            if (user == null)
+            {
+                return false;
+            }
+
+            Developer developer = new Developer()
+            {
+                Id = Guid.NewGuid().ToString(),
+                UserId = userId,
+                FirstName = user.FirstName,
+                LastName = user.LastName
+            };
+            await userManager.AddToRolesAsync(user, new List<string> {"Developer" });
+
+            await repo.AddAsync(developer);
+            await repo.SaveChangesAsync();
+
+            return true;
+        }
+
+        public async Task<StatisticsPageViewModel> GetStatistics(string userId)
+        {
+            var model = new StatisticsPageViewModel();
+
+            string developerId = await GetDeveloperIdByUserId(userId);
+            if (developerId == null)
+            {
+                return null;
+            }
+            
+            model.SalesCount = await repo.All<Game>()
+                .Where(g => g.DeveloperId == developerId)
+                .CountAsync();
+
+            var allGamesOfDev = await repo.All<Game>()
+                .Where(g => g.DeveloperId == developerId)
+                .ToListAsync();
+
+            decimal? revenue = 0;
+            foreach (var game in allGamesOfDev)
+            {
+                revenue += game.Sales * game.Price;
+            }
+            model.Revenue = revenue;
+
+
+
+            return model;
         }
 
     }
