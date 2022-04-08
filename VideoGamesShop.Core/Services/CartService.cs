@@ -132,6 +132,8 @@ namespace VideoGamesShop.Core.Services
                     GameId = item.GameId
                 };
 
+                item.Game.Sales++;
+
                 user.Games.Add(purchase);
                 repo.Delete(item);
             }

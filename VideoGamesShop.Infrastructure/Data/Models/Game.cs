@@ -32,7 +32,7 @@ namespace VideoGamesShop.Infrastructure.Data.Models
         [MaxLength(250)]
         public string ImageUrl { get; set; }
 
-        public int? Sales { get; init; } = 0;
+        public int? Sales { get; set; } = 0;
 
 
         public string DeveloperId { get; init; }
