@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using System.Security.Claims;
 using VideoGamesShop.Core.Contracts;
 using VideoGamesShop.Core.Models.Game;
+using VideoGamesShop.Extensions;
 using static VideoGamesShop.Core.Constants.UserConstants;
 
 namespace VideoGamesShop.Controllers
@@ -37,7 +38,7 @@ namespace VideoGamesShop.Controllers
         [Authorize]
         public async Task<IActionResult> AddGame(AddGameFormModel game)
         {
-            var userId = User.FindFirst(ClaimTypes.NameIdentifier).Value;
+            var userId = User.Id();
             string developerId = await userService.GetDeveloperIdByUserId(userId);
 
             var gameCreated = await gameService.AddGame(
@@ -54,6 +55,14 @@ namespace VideoGamesShop.Controllers
 
             return Redirect("~/store/games");
         }
+
+        public async Task<IActionResult> Dashboard(string userId)
+        {
+            var model = await userService.GetStatistics(userId);
+
+            return View(model);
+        }
+
 
         public IActionResult Index()
         {
