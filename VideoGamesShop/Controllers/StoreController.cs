@@ -23,7 +23,7 @@ namespace VideoGamesShop.Controllers
         {
             var games = await gameService.GetGames();
 
-            const int pageSize = 2;
+            const int pageSize = 6;
             if (pg < 1)
             {
                 pg = 1;

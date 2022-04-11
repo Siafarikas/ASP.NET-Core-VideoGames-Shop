@@ -1,9 +1,9 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using System.Security.Claims;
 using VideoGamesShop.Core.Contracts;
 using VideoGamesShop.Extensions;
 using VideoGamesShop.Infrastructure.Data.Identity;
+using System.Linq;
 
 namespace VideoGamesShop.Controllers
 {

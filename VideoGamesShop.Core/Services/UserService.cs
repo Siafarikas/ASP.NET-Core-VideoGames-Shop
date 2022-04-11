@@ -141,10 +141,11 @@ namespace VideoGamesShop.Core.Services
             {
                 return null;
             }
-            
-            model.SalesCount = await repo.All<Game>()
+
+            model.SalesCount = (int) await repo.All<Game>()
                 .Where(g => g.DeveloperId == developerId)
-                .CountAsync();
+                .Select(g => g.Sales)
+                .SumAsync();
 
             var allGamesOfDev = await repo.All<Game>()
                 .Where(g => g.DeveloperId == developerId)
@@ -158,7 +159,15 @@ namespace VideoGamesShop.Core.Services
             model.Revenue = revenue;
 
 
-
+            model.Sales = await (from purchase in repo.All<Purchase>()
+                                 from game in repo.All<Game>().Where(g => g.Id == purchase.GameId && g.DeveloperId == developerId)
+                                 from user in repo.All<ApplicationUser>().Where(u => u.Id == purchase.UserId)
+                                 select new SalesViewModel()
+                                 {
+                                     CustomerName = $"{user.FirstName} {user.LastName}",
+                                     GameTitle = game.Title,
+                                     GamePrice = game.Price
+                                 }).ToListAsync();
             return model;
         }
 

@@ -38,8 +38,7 @@ namespace VideoGamesShop.Controllers
         {
             await cartService.BuyProductsInCart(userId);
 
-            // return RedirectToAction("MyGames", "Library", new { userId = userId });
-            return Redirect("/");
+            return RedirectToAction("MyLibrary", "User", new { userId = userId });
         }
 
         public IActionResult Index()

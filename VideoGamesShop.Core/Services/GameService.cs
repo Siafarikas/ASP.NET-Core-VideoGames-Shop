@@ -63,9 +63,9 @@ namespace VideoGamesShop.Core.Services
 
         public async Task<IEnumerable<GameLibraryViewModel>> GetUsersGames(string userId)
         {
-            return await (from user in repo.All<ApplicationUser>().Where(u => u.Id == userId).DefaultIfEmpty()
-                          from purchase in repo.All<Purchase>().Where(p => p.UserId == user.Id).DefaultIfEmpty()
-                          from game in repo.All<Game>().Where(game => game.Id == purchase.GameId).DefaultIfEmpty()
+            return await (from user in repo.All<ApplicationUser>().Where(u => u.Id == userId)
+                          from purchase in repo.All<Purchase>().Where(p => p.UserId == user.Id)
+                          from game in repo.All<Game>().Where(game => game.Id == purchase.GameId)
                           select new GameLibraryViewModel()
                           {
                               Id = game.Id,
