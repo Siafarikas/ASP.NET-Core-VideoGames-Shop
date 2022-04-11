@@ -1,9 +1,20 @@
 ﻿@using System.Security.Claims
 @using VideoGamesShop.Core.Models
+@using VideoGamesShop.Core.Models.Game
 @using VideoGamesShop.Extensions
 @model IEnumerable<GameListViewModel>
 @{
     ViewData["Title"] = "Games";
+
+    Pager pager = new Pager();
+
+    int pageNo = 0;
+
+    if (ViewBag.Pager != null)
+    {
+        pager = ViewBag.Pager;
+        pageNo = pager.CurrentPage;
+    }
 }
 <style>
     h1 {
@@ -38,3 +49,4 @@
     </div>
 </div>
 
+<partial name="_pager" model="@pager" />
