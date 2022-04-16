@@ -31,6 +31,14 @@ namespace VideoGamesShop.Infrastructure.Data
                 .WithMany(u => u.Users)
                 .HasForeignKey(p => p.GameId);
 
+            builder.Entity<Wish>()
+            .HasKey(w => new { w.UserId, w.GameId });
+
+            builder.Entity<Wish>()
+            .HasOne(w => w.User)
+            .WithMany(u => u.Wishes)
+            .HasForeignKey(w => w.UserId);
+
             base.OnModelCreating(builder);
         }
 
@@ -39,5 +47,6 @@ namespace VideoGamesShop.Infrastructure.Data
         public DbSet<Developer> Developers { get; init; }
         public DbSet<Item> CartItems { get; init; }
         public DbSet<Purchase> Purchases { get; init; }
+        public DbSet<Wish> Wishes { get; init; }
     }
 }

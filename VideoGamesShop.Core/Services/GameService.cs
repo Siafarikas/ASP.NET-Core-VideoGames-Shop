@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using VideoGamesShop.Core.Contracts;
 using VideoGamesShop.Core.Models;
 using VideoGamesShop.Core.Models.Game;
+using VideoGamesShop.Core.Models.Wishlist;
 using VideoGamesShop.Infrastructure.Data.Identity;
 using VideoGamesShop.Infrastructure.Data.Models;
 using VideoGamesShop.Infrastructure.Data.Repositories;
@@ -74,7 +75,7 @@ namespace VideoGamesShop.Core.Services
                           }).ToListAsync();
         }
 
-
+        
         public async Task<bool> AddGame(string title, string genreId, decimal price, string releaseDate, string description, string imageUrl, string developerId)
         {
             Genre genre = await repo.All<Genre>()
@@ -97,7 +98,7 @@ namespace VideoGamesShop.Core.Services
                 Description = description,
                 ImageUrl = imageUrl,
                 Developer = dev
-                };
+            };
 
             await repo.AddAsync(game);
             await repo.SaveChangesAsync();
@@ -116,7 +117,7 @@ namespace VideoGamesShop.Core.Services
                 .ToListAsync();
         }
 
-        public async Task<bool> GameWithIdExists(string gameId) 
+        public async Task<bool> GameWithIdExists(string gameId)
         {
             return await repo.All<Game>()
                 .AnyAsync(g => g.Id == gameId);

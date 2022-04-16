@@ -68,12 +68,9 @@
 
                 <li class="nav-item dropdown">
 
-                    <a class="nav-link nav-icon" href="#" data-bs-toggle="dropdown">
-                        <i class="bi bi-heart"></i>
-                        <span class="badge bg-danger badge-number">4</span>
-                    </a><!-- End Notification Icon -->
+                    <a asp-controller="Wishlist" asp-action="MyWishlist" asp-route-userId="@User.Id()" class="nav-link nav-icon"> <i class="bi bi-heart"></i></a>
 
-                </li><!-- End Notification Nav -->
+                </li>
 
                 <li class="nav-item">
                     @if (User.Identity.IsAuthenticated && !(User.IsDeveloper()))

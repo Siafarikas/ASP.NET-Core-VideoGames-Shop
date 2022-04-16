@@ -10,13 +10,16 @@ namespace VideoGamesShop.Controllers
     {
         private readonly IGameService gameService;
         private readonly ICartService cartService;
+        private readonly IWishlistService wishlistService;
 
         public StoreController(
             IGameService _gameService,
-            ICartService _cartService)
+            ICartService _cartService,
+            IWishlistService _wishlistService)
         {
             gameService = _gameService;
             cartService = _cartService;
+            wishlistService = _wishlistService;
         }
 
         [Authorize]
@@ -25,6 +28,7 @@ namespace VideoGamesShop.Controllers
             var games = await gameService.GetGames();
 
             const int pageSize = 6;
+
             if (pg < 1)
             {
                 pg = 1;
@@ -51,20 +55,32 @@ namespace VideoGamesShop.Controllers
             if (addedToCart == true)
             {
                 TempData[MessageConstants.SuccessMessage] = "Successfully added to cart!";
+                return RedirectToAction("MyCart", "Cart", new { userId = userId });
             }
             else
             {
                 TempData[MessageConstants.ErrorMessage] = "An error occurred";
+                return RedirectToAction("Games", "Store");
             }
-            return RedirectToAction("Games", "Store");
         }
 
         [Authorize]
-        public async Task<IActionResult> AddToWishlist()
+        public async Task<IActionResult> AddToWishlist(string userId, string gameId)
         {
+            var addedToCart = await wishlistService.AddToWishlist(userId, gameId);
 
-            return View();
+            if (addedToCart == true)
+            {
+                TempData[MessageConstants.SuccessMessage] = "Successfully added to wishlist!";
+                return RedirectToAction("MyWishlist", "Wishlist", new { userId = userId });
+            }
+            else
+            {
+                TempData[MessageConstants.ErrorMessage] = "An error occurred";
+                return RedirectToAction("Games", "Store");
+            }
         }
+
 
         [Authorize]
         public async Task<IActionResult> GameDetails(string gameId)

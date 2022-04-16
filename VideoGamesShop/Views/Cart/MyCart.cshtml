@@ -3,7 +3,7 @@
 @using VideoGamesShop.Extensions
 @model IEnumerable<CartItemViewModel>
 @{
-    ViewData["Title"] = "MyCart";
+    ViewData["Title"] = "My Cart";
 }
 <style>
     img-cart {
@@ -37,7 +37,7 @@
 
 <main>
     <div class="container">
-        <center><b><h1>My Cart</h1></b></center>
+        <center><b><h1>@ViewData["Title"]</h1></b></center>
 
 
         <!--Section: Block Content-->

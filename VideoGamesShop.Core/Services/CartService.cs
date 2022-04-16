@@ -12,13 +12,16 @@ namespace VideoGamesShop.Core.Services
     {
         private readonly IApplicationDbRepo repo;
         private readonly IUserService userService;
+        private readonly IWishlistService wishlistService;
          
         public CartService(
             IApplicationDbRepo _repo,
-            IUserService _userService)
+            IUserService _userService,
+            IWishlistService _wishlistService)
         {
             repo = _repo;
             userService = _userService;
+            wishlistService = _wishlistService;
         }
 
         public async Task<bool> AddToCart(string userId, string gameId)
@@ -135,6 +138,18 @@ namespace VideoGamesShop.Core.Services
                 item.Game.Sales++;
 
                 user.Games.Add(purchase);
+
+                Wish wish = new Wish()
+                {
+                    UserId = item.UserId,
+                    GameId = item.GameId
+                };
+                var gameInWishlist = repo.All<Wish>()
+                    .Contains(wish);
+                if (gameInWishlist)
+                {
+                    await wishlistService.RemoveFromWishlist(item.UserId, item.GameId);
+                }
                 repo.Delete(item);
             }
 

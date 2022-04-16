@@ -1,17 +1,7 @@
 ﻿@using VideoGamesShop.Core.Models.Developer
 @using VideoGamesShop.Core.Models.Game
 @model StatisticsPageViewModel;
-@{
-    //Pager pager = new Pager();
 
-    //int pageNo = 0;
-
-    //if (ViewBag.Pager != null)
-    //{
-    //    pager = ViewBag.Pager;
-    //    pageNo = pager.CurrentPage;
-    //}
-}
 <center><h1><b>My Statistics</b></h1></center>
 <br />
 <section class="section dashboard">
@@ -57,44 +47,7 @@
                         </div>
 
                     </div>
-                </div><!-- End Revenue Card -->
-                @*<!-- Customers Card -->
-                    <div class="col-xxl-4 col-xl-12">
-
-                    <div class="card info-card customers-card">
-
-                    <div class="filter">
-                    <a class="icon" href="#" data-bs-toggle="dropdown"><i class="bi bi-three-dots"></i></a>
-                    <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
-                    <li class="dropdown-header text-start">
-                    <h6>Filter</h6>
-                    </li>
-
-                    <li><a class="dropdown-item" href="#">Today</a></li>
-                    <li><a class="dropdown-item" href="#">This Month</a></li>
-                    <li><a class="dropdown-item" href="#">This Year</a></li>
-                    </ul>
-                    </div>
-
-                    <div class="card-body">
-                    <h5 class="card-title">Customers <span>| This Year</span></h5>
-
-                    <div class="d-flex align-items-center">
-                    <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
-                    <i class="bi bi-people"></i>
-                    </div>
-                    <div class="ps-3">
-                    <h6>1244</h6>
-                    <span class="text-danger small pt-1 fw-bold">12%</span> <span class="text-muted small pt-2 ps-1">decrease</span>
-
-                    </div>
-                    </div>
-
-                    </div>
-                    </div>
-
-                    </div><!-- End Customers Card -->*@
-                <!-- Recent Sales -->
+                </div>
                 <div class="col-12">
                     <div class="card recent-sales overflow-auto">
 
@@ -130,7 +83,7 @@
                                             <tr>
                                                 <td>@sale.CustomerName</td>
                                                 <td>
-                                                    <a href="#" class="text-primary">@sale.GameTitle</a>
+                                                    <a class="text-primary">@sale.GameTitle</a>
                                                 </td>
                                                 <td>$@sale.GamePrice</td>
                                                 <td>

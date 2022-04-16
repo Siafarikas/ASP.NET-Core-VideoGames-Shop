@@ -14,6 +14,7 @@ namespace Microsoft.Extensions.DependencyInjection
             services.AddScoped<IUserService, UserService>();
             services.AddScoped<IGameService, GameService>();
             services.AddScoped<ICartService, CartService>();
+            services.AddScoped<IWishlistService, WishlistService>();
 
             return services;
         }

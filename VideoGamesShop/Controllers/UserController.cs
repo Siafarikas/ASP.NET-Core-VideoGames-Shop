@@ -77,6 +77,8 @@ namespace VideoGamesShop.Controllers
             return View(games);
         }
 
+        
+
         public async Task<IActionResult> BecomeDeveloper(string userId)
         {
             if (await userService.UserBecomesDeveloper(userId))
