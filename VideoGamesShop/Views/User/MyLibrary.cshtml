@@ -29,12 +29,9 @@
                         <img src="@game.ImageUrl" class="card-img-top" alt="...">
                         <div class="card-body">
                             <center><h5 class="card-title">@game.Title</h5></center>
-                            <center><p class="card-text">@game.Description</p></center>
                             <br>
                             <center>
-                                <a asp-controller="Store" asp-action="GameDetails" asp-route-gameId="@game.Id" class="btn btn-secondary"><i class="bi bi-info-circle me-1"></i></a>
-                                <a asp-controller="Store" asp-action="AddToCart" asp-route-userId="@User.Id()" asp-route-gameId="@game.Id" class="btn btn-primary"><center><i class="bi bi-cart2 me-1"></i></center></a>
-                                <button type="button" class="btn btn-danger"><i class="bi bi-heart me-1"></i></button>
+                                <button class="btn bg-primary" style="color: white">Play</button>
                             </center>
                         </div>
                     </div>

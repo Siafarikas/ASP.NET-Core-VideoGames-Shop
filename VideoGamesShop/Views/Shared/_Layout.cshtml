@@ -61,7 +61,7 @@
             <i class="bi bi-list toggle-sidebar-btn"></i>
         </div><!-- End Logo -->
 
-       
+
 
         <nav class="header-nav ms-auto">
             <ul class="d-flex align-items-center">
@@ -78,7 +78,7 @@
                 <li class="nav-item">
                     @if (User.Identity.IsAuthenticated && !(User.IsDeveloper()))
                     {
-                        <a asp-controller="User" asp-action="BecomeDeveloper" asp-route-userId="@User.Id()" class="nav-link">Become developer</a>
+                        <a asp-controller="User" asp-action="BecomeDeveloper" asp-route-userId="@User.Id()" class="nav-link" style="color: black">Become developer</a>
                     }
 
                 </li>
@@ -86,7 +86,7 @@
                 <li class="nav-item">
                     @if (User.Identity.IsAuthenticated)
                     {
-                        <a asp-controller="Cart" asp-action="MyCart" asp-route-userId="@User.Id()" class="nav-link"><i class="bi bi-cart2"></i></a>
+                        <a asp-controller="Cart" asp-action="MyCart" asp-route-userId="@User.Id()" class="nav-link nav-icon"><i class="bi bi-cart2"></i></a>
                     }
 
                 </li>
@@ -157,7 +157,6 @@
                         <li>
 
                             <form class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Page("/", new { area = "" })" method="post">
-
                                 <button type="submit" class="dropdown-item d-flex"><i class="bi bi-door-open"> </i>Sign Out</button>
                             </form>
                         </li>
@@ -230,7 +229,7 @@
     <!-- ======= Footer ======= -->
     <footer id="footer" class="footer">
         <div class="copyright">
-            &copy; Copyright <strong><span>NiceAdmin</span></strong>. All Rights Reserved
+            &copy; Copyright <strong><span>GameShop</span></strong>. All Rights Reserved
         </div>
         <div class="credits">
             <!-- All the links in the footer should remain intact. -->
@@ -257,7 +256,7 @@
 
     <script src="~/assets/jquery/jquery.min.js"></script>
     <script src="~/assets/toastr/toastr.min.js"></script>
-    <partial name ="_UserMessages" />
+    <partial name="_UserMessages" />
     @await RenderSectionAsync("Scripts", required: false)
 </body>
 

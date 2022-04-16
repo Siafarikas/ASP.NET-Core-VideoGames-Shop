@@ -54,7 +54,7 @@ namespace VideoGamesShop.Controllers
             }
             else
             {
-                TempData[MessageConstants.ErrorMessage] = "An error accured";
+                TempData[MessageConstants.ErrorMessage] = "An error occurred";
             }
             return RedirectToAction("Games", "Store");
         }

@@ -39,7 +39,7 @@ namespace VideoGamesShop.Controllers
             }
             else
             {
-                TempData[MessageConstants.ErrorMessage] = "An error accured!";
+                TempData[MessageConstants.ErrorMessage] = "An error occurred!";
             }
 
             return RedirectToAction("MyCart", "Cart", new { userId = userId });
@@ -51,12 +51,12 @@ namespace VideoGamesShop.Controllers
 
             if (boughtItems == true)
             {
-                TempData[MessageConstants.SuccessMessage] = "Successfull purchase!";
+                TempData[MessageConstants.SuccessMessage] = "Successful purchase!";
                 return RedirectToAction("MyLibrary", "User", new { userId = userId });
             }
             else
             {
-                TempData[MessageConstants.ErrorMessage] = "An error accured!";
+                TempData[MessageConstants.ErrorMessage] = "An error occurred!";
                 return RedirectToAction("MyCart", "Cart", new { userId = userId });
             }
         }

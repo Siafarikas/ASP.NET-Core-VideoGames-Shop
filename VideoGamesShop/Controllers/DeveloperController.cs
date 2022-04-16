@@ -58,7 +58,7 @@ namespace VideoGamesShop.Controllers
             }
             else
             {
-                TempData[MessageConstants.ErrorMessage] = "An error accured!";
+                TempData[MessageConstants.ErrorMessage] = "An error occurred!";
             }
 
             return Redirect("~/store/games");
@@ -67,7 +67,10 @@ namespace VideoGamesShop.Controllers
         public async Task<IActionResult> Dashboard(string userId)
         {
             var model = await userService.GetStatistics(userId);
-
+            if (model == null)
+            {
+                TempData[MessageConstants.ErrorMessage] = "An error occurred!";
+            }
             return View(model);
         }
 

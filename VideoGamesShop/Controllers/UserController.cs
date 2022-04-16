@@ -5,6 +5,7 @@ using VideoGamesShop.Extensions;
 using VideoGamesShop.Infrastructure.Data.Identity;
 using System.Linq;
 using VideoGamesShop.Core.Constants;
+using System.Net;
 
 namespace VideoGamesShop.Controllers
 {
@@ -80,14 +81,16 @@ namespace VideoGamesShop.Controllers
         {
             if (await userService.UserBecomesDeveloper(userId))
             {
-                TempData[MessageConstants.SuccessMessage] = "You are now a developer!";
-                return Redirect("~/");
+                TempData[MessageConstants.SuccessMessage] = "Success! Please re-log for changes to take effect.";
             }
             else
             {
-                return RedirectToAction("404", "Error");
+                TempData[MessageConstants.SuccessMessage] = "An error occurred";
             }
+
+            return RedirectToAction("Index", "Home");
         }
+
         /*public async Task<IActionResult> CreateRole()
         {
             await roleManager.CreateAsync(new IdentityRole()
