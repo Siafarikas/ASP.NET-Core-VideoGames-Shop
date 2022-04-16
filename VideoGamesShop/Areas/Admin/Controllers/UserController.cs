@@ -74,34 +74,5 @@ namespace VideoGamesShop.Areas.Admin.Controllers
 
             return RedirectToAction(nameof(ManageUsers));
         }
-
-        /*public async Task<IActionResult> Edit(string id)
-        {
-            var model = userService.GetUserForEdit(id);
-
-            return View(model);
-        }
-
-        [HttpPost]
-        public async Task<IActionResult> Edit(string id, UserEditViewModel model)
-        {
-            if (!ModelState.IsValid || id != model.Id)
-            {
-                return View(model);
-            }
-
-            if (await userService.UpdateUser(model))
-            {
-                ViewData[MessageConstants.SuccessMessage] = "Successfully updated";
-            }
-            else
-            {
-                ViewData[MessageConstants.ErrorMessage] = "Did not update successfully";
-            }
-
-            return View(model);
-        }*/
-
-        
     }
 }
