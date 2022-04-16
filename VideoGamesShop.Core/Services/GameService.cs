@@ -16,9 +16,9 @@ namespace VideoGamesShop.Core.Services
 {
     public class GameService : IGameService
     {
-        private readonly IApplicatioDbRepo repo;
+        private readonly IApplicationDbRepo repo;
 
-        public GameService(IApplicatioDbRepo _repo)
+        public GameService(IApplicationDbRepo _repo)
         {
             repo = _repo;
         }

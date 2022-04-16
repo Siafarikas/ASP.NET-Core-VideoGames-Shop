@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using VideoGamesShop.Core.Constants;
 using VideoGamesShop.Core.Contracts;
 using VideoGamesShop.Core.Models.Game;
 
@@ -49,13 +50,13 @@ namespace VideoGamesShop.Controllers
 
             if (addedToCart == true)
             {
-                //TempData[GlobalMessageKey] = "Successfully added to cart!";
+                TempData[MessageConstants.SuccessMessage] = "Successfully added to cart!";
             }
             else
             {
-                //TempData[GlobalMessageKey] = "An error accured";
+                TempData[MessageConstants.ErrorMessage] = "An error accured";
             }
-            return RedirectToAction("MyCart", "Cart", new { userId = userId });
+            return RedirectToAction("Games", "Store");
         }
 
         [Authorize]

@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
+using VideoGamesShop.Core.Constants;
 using VideoGamesShop.Models;
 
 namespace VideoGamesShop.Controllers

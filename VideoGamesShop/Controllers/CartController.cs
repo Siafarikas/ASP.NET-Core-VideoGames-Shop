@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using VideoGamesShop.Core.Constants;
 using VideoGamesShop.Core.Contracts;
 using VideoGamesShop.Extensions;
 
@@ -21,6 +22,7 @@ namespace VideoGamesShop.Controllers
             {
                 return RedirectToAction("404", "Error");
             }
+
             var productsInCart = await cartService.UsersCart(userId);
 
             return View(productsInCart);
@@ -29,16 +31,34 @@ namespace VideoGamesShop.Controllers
         [Authorize]
         public async Task<IActionResult> RemoveFromCart(string userId, string gameId)
         {
-            await cartService.RemoveFromCart(userId, gameId);
+            var removedItem = await cartService.RemoveFromCart(userId, gameId);
 
-            return RedirectToAction("MyCart", "Cart", new { userId = userId});
+            if (removedItem == true)
+            {
+                TempData[MessageConstants.SuccessMessage] = "Successfully removed from cart!";
+            }
+            else
+            {
+                TempData[MessageConstants.ErrorMessage] = "An error accured!";
+            }
+
+            return RedirectToAction("MyCart", "Cart", new { userId = userId });
         }
 
         public async Task<IActionResult> Buy(string userId)
         {
-            await cartService.BuyProductsInCart(userId);
+            var boughtItems = await cartService.BuyProductsInCart(userId);
 
-            return RedirectToAction("MyLibrary", "User", new { userId = userId });
+            if (boughtItems == true)
+            {
+                TempData[MessageConstants.SuccessMessage] = "Successfull purchase!";
+                return RedirectToAction("MyLibrary", "User", new { userId = userId });
+            }
+            else
+            {
+                TempData[MessageConstants.ErrorMessage] = "An error accured!";
+                return RedirectToAction("MyCart", "Cart", new { userId = userId });
+            }
         }
 
         public IActionResult Index()

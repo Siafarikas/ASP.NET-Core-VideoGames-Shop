@@ -12,12 +12,12 @@ namespace VideoGamesShop.Core.Services
 {
     public class UserService : IUserService
     {
-        private readonly IApplicatioDbRepo repo;
+        private readonly IApplicationDbRepo repo;
         private readonly RoleManager<IdentityRole> roleManager;
 
         private readonly UserManager<ApplicationUser> userManager;
         public UserService(
-            IApplicatioDbRepo _repo,
+            IApplicationDbRepo _repo,
             RoleManager<IdentityRole> _roleManager,
             UserManager<ApplicationUser> _userManager)
         {
@@ -92,6 +92,7 @@ namespace VideoGamesShop.Core.Services
             await repo.SaveChangesAsync();
         }
 
+        // Developer methods
         public async Task<string> GetDeveloperIdByUserId(string userId)
         {
             var user = await repo.GetByIdAsync<ApplicationUser>(userId);
@@ -124,7 +125,7 @@ namespace VideoGamesShop.Core.Services
                 FirstName = user.FirstName,
                 LastName = user.LastName
             };
-            await userManager.AddToRolesAsync(user, new List<string> {"Developer" });
+            await userManager.AddToRolesAsync(user, new List<string> { "Developer" });
 
             await repo.AddAsync(developer);
             await repo.SaveChangesAsync();
@@ -142,7 +143,7 @@ namespace VideoGamesShop.Core.Services
                 return null;
             }
 
-            model.SalesCount = (int) await repo.All<Game>()
+            model.SalesCount = (int)await repo.All<Game>()
                 .Where(g => g.DeveloperId == developerId)
                 .Select(g => g.Sales)
                 .SumAsync();
@@ -167,7 +168,13 @@ namespace VideoGamesShop.Core.Services
                                      CustomerName = $"{user.FirstName} {user.LastName}",
                                      GameTitle = game.Title,
                                      GamePrice = game.Price
-                                 }).ToListAsync();
+                                 })
+                                 .ToListAsync();
+
+            model.Sales = model.Sales
+                .Reverse()
+                .Take(5);
+
             return model;
         }
 

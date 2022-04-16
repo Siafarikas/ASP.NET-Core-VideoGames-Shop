@@ -10,11 +10,11 @@ namespace VideoGamesShop.Core.Services
 {
     public class CartService : ICartService
     {
-        private readonly IApplicatioDbRepo repo;
+        private readonly IApplicationDbRepo repo;
         private readonly IUserService userService;
-
+         
         public CartService(
-            IApplicatioDbRepo _repo,
+            IApplicationDbRepo _repo,
             IUserService _userService)
         {
             repo = _repo;

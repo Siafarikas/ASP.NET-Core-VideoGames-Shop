@@ -9,7 +9,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VideoGamesShop.Core", "Vide
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VideoGamesShop.Infrastructure", "VideoGamesShop.Infrastructure\VideoGamesShop.Infrastructure.csproj", "{0EDEC9F3-F29C-476F-B6F9-676DD93C1E4D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VideoGamesShop.Api", "VideoGamesShop.Api\VideoGamesShop.Api.csproj", "{BDE642B5-3D5E-4FBF-98DE-519C3A031CDE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VideoGamesShop.Api", "VideoGamesShop.Api\VideoGamesShop.Api.csproj", "{BDE642B5-3D5E-4FBF-98DE-519C3A031CDE}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

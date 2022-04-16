@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Security.Claims;
+using VideoGamesShop.Core.Constants;
 using VideoGamesShop.Core.Contracts;
 using VideoGamesShop.Core.Models.Game;
 using VideoGamesShop.Extensions;
@@ -51,7 +52,14 @@ namespace VideoGamesShop.Controllers
                 developerId
                 );
 
-            //TempData[GlobalMessageKey] = "Successfully published game!";
+            if (gameCreated == true)
+            {
+                TempData[MessageConstants.SuccessMessage] = "Successfully published game!";
+            }
+            else
+            {
+                TempData[MessageConstants.ErrorMessage] = "An error accured!";
+            }
 
             return Redirect("~/store/games");
         }

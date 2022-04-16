@@ -4,6 +4,7 @@ using VideoGamesShop.Core.Contracts;
 using VideoGamesShop.Extensions;
 using VideoGamesShop.Infrastructure.Data.Identity;
 using System.Linq;
+using VideoGamesShop.Core.Constants;
 
 namespace VideoGamesShop.Controllers
 {
@@ -60,6 +61,8 @@ namespace VideoGamesShop.Controllers
         {
             await userService.AddMoneyToWallet(userId, amount);
 
+            TempData[MessageConstants.SuccessMessage] = "Successfully added money to wallet!";
+
             return RedirectToAction("MyWallet", "User", new { userId = userId });
         }
 
@@ -77,8 +80,8 @@ namespace VideoGamesShop.Controllers
         {
             if (await userService.UserBecomesDeveloper(userId))
             {
+                TempData[MessageConstants.SuccessMessage] = "You are now a developer!";
                 return Redirect("~/");
-
             }
             else
             {

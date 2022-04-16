@@ -36,7 +36,7 @@
 
     <!-- Template Main CSS File -->
     <link href="~/assets/css/style.css" rel="stylesheet">
-
+    <link rel="stylesheet" href="~/assets/toastr/toastr.min.css" />
     <!-- =======================================================
     * Template Name: NiceAdmin - v2.2.2
     * Template URL: https://bootstrapmade.com/nice-admin-bootstrap-admin-html-template/
@@ -61,21 +61,10 @@
             <i class="bi bi-list toggle-sidebar-btn"></i>
         </div><!-- End Logo -->
 
-        <div class="search-bar">
-            <form class="search-form d-flex align-items-center" method="POST" action="#">
-                <input type="text" name="query" placeholder="Search" title="Enter search keyword">
-                <button type="submit" title="Search"><i class="bi bi-search"></i></button>
-            </form>
-        </div><!-- End Search Bar -->
+       
 
         <nav class="header-nav ms-auto">
             <ul class="d-flex align-items-center">
-
-                <li class="nav-item d-block d-lg-none">
-                    <a class="nav-link nav-icon search-bar-toggle " href="#">
-                        <i class="bi bi-search"></i>
-                    </a>
-                </li><!-- End Search Icon-->
 
                 <li class="nav-item dropdown">
 
@@ -166,9 +155,6 @@
                         </li>
 
                         <li>
-                            @*<a class="dropdown-item d-flex align-items-center" href="\identity\account\logout">
-                                <i class="bi bi-box-arrow-right"></i>
-                                <span>Sign Out</span>*@
 
                             <form class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Page("/", new { area = "" })" method="post">
 
@@ -233,7 +219,6 @@
                         <span>Publish Game</span>
                     </a>
                 </li>
-
             }
         </ul>
     </aside>
@@ -269,8 +254,11 @@
 
     <!-- Template Main JS File -->
     <script src="~/assets/js/main.js"></script>
-    @await RenderSectionAsync("Scripts", required: false)
 
+    <script src="~/assets/jquery/jquery.min.js"></script>
+    <script src="~/assets/toastr/toastr.min.js"></script>
+    <partial name ="_UserMessages" />
+    @await RenderSectionAsync("Scripts", required: false)
 </body>
 
 </html>
