@@ -15,6 +15,6 @@ namespace VideoGamesShop.Core.Models.Developer
 
         //public int Customers { get; set; }
 
-        public ICollection<SalesViewModel> Sales { get; set; } 
+        public IEnumerable<SalesViewModel> Sales { get; set; } 
     }
 }
