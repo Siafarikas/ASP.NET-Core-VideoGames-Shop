@@ -2,7 +2,7 @@
 
 namespace VideoGamesShop.Infrastructure.Data.Repositories
 {
-    public interface IApplicatioDbRepo : IRepository
+    public interface IApplicationDbRepo : IRepository
     {
 
     }

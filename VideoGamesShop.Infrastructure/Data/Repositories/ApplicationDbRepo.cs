@@ -3,9 +3,9 @@ using VideoGamesShop.Infrastructure.Data.Common;
 
 namespace VideoGamesShop.Infrastructure.Data.Repositories
 {
-    public class ApplicatioDbRepo : Repository, IApplicatioDbRepo
+    public class ApplicationDbRepo : Repository, IApplicationDbRepo
     {
-        public ApplicatioDbRepo(ApplicationDbContext context)
+        public ApplicationDbRepo(ApplicationDbContext context)
         {
             this.Context = context;
         }
