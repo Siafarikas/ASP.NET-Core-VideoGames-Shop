@@ -49,7 +49,6 @@ namespace VideoGamesShop.Infrastructure.Data.Models
 
         public virtual ICollection<Purchase> Users { get; set; } = new List<Purchase>();
 
-        public IList<Tag> Tags { get; set; } = new List<Tag>();
 
     }
 }
