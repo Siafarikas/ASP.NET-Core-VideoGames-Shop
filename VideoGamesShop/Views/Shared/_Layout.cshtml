@@ -66,6 +66,13 @@
         <nav class="header-nav ms-auto">
             <ul class="d-flex align-items-center">
 
+                <li class="nav-item">
+                    @if (User.Identity.IsAuthenticated && !(User.IsDeveloper()))
+                    {
+                        <a asp-controller="User" asp-action="BecomeDeveloper" asp-route-userId="@User.Id()" class="nav-link" style="color: black">Become developer</a>
+                    }
+
+                </li>
 
                 <li class="nav-item dropdown">
                     @if (User.Identity.IsAuthenticated)
@@ -74,13 +81,6 @@
                     }
                 </li>
 
-                <li class="nav-item">
-                    @if (User.Identity.IsAuthenticated && !(User.IsDeveloper()))
-                    {
-                        <a asp-controller="User" asp-action="BecomeDeveloper" asp-route-userId="@User.Id()" class="nav-link" style="color: black">Become developer</a>
-                    }
-
-                </li>
 
                 <li class="nav-item">
                     @if (User.Identity.IsAuthenticated)
