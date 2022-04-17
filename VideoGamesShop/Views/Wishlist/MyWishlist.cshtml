@@ -47,6 +47,11 @@
 
                 <!-- Grid column -->
                 <!-- Card -->
+                @if (@Model.Select(p => p.UserId == @User.Id()).Count() == 0)
+                            {
+                               <center> No games in wishlist - <a class="nav-link" href="~/store/games"><span>Go To Store</span></a></center>
+                               <br />
+                            }
                 @foreach (var game in @Model)
                 {
                         <div class="col-md-4 mb-5">

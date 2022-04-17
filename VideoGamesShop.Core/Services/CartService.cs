@@ -1,8 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using System.Globalization;
 using VideoGamesShop.Core.Contracts;
 using VideoGamesShop.Core.Models.Cart;
-using VideoGamesShop.Infrastructure.Data.Identity;
 using VideoGamesShop.Infrastructure.Data.Models;
 using VideoGamesShop.Infrastructure.Data.Repositories;
 
@@ -82,8 +80,6 @@ namespace VideoGamesShop.Core.Services
 
         public async Task<IEnumerable<CartItemViewModel>> UsersCart(string userId)
         {
-            var products = await repo.All<Item>().Where(i => i.UserId == userId).ToListAsync();
-
             return await (from i in repo.All<Item>().Where(i => i.UserId == userId)
                           from g in repo.All<Game>().Where(g => g.Id == i.GameId).DefaultIfEmpty()
                           from dev in repo.All<Developer>().Where(d => d.Id == g.DeveloperId).DefaultIfEmpty()
