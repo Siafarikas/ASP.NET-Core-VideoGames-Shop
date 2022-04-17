@@ -1,14 +1,8 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
 using System.Globalization;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using VideoGamesShop.Core.Contracts;
 using VideoGamesShop.Core.Models;
 using VideoGamesShop.Core.Models.Game;
-using VideoGamesShop.Core.Models.Wishlist;
 using VideoGamesShop.Infrastructure.Data.Identity;
 using VideoGamesShop.Infrastructure.Data.Models;
 using VideoGamesShop.Infrastructure.Data.Repositories;
@@ -42,9 +36,7 @@ namespace VideoGamesShop.Core.Services
                               Genre = genre.Title,
                               ImageUrl = game.ImageUrl
                           })
-                          .FirstOrDefaultAsync();
-
-
+                          .FirstAsync();
         }
 
         public async Task<IEnumerable<GameListViewModel>> GetGames()
@@ -58,7 +50,7 @@ namespace VideoGamesShop.Core.Services
                               Title = game.Title,
                               Price = game.Price,
                               Genre = genre.Title,
-                              ImageUrl = game.ImageUrl,
+                              ImageUrl = game.ImageUrl
                           }).ToListAsync();
         }
 
@@ -121,6 +113,16 @@ namespace VideoGamesShop.Core.Services
         {
             return await repo.All<Game>()
                 .AnyAsync(g => g.Id == gameId);
+        }
+
+        public async Task<string> GetGenreTitleById(string genreId)
+        {
+            var genre = await repo.All<Genre>()
+                .Where(g => g.Id == genreId)
+                .Select(g => g.Title)
+                .FirstOrDefaultAsync();
+
+            return genre;
         }
     }
 }

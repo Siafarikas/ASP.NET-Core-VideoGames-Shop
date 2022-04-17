@@ -19,5 +19,6 @@ namespace VideoGamesShop.Core.Contracts
 
         Task<bool> GameWithIdExists(string gameId);
 
+        Task<string> GetGenreTitleById(string genreId);
     }
 }
