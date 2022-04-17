@@ -4,10 +4,10 @@
 @using VideoGamesShop.Infrastructure.Data.Identity
 @inject UserManager<ApplicationUser> userManager;
 
-@if (User.Identity.IsAuthenticated)
+@if (User.Identity?.IsAuthenticated ?? false)
 {
     <a class="nav-link nav-profile d-flex align-items-center pe-0" href="#" data-bs-toggle="dropdown">
-        <img src="~/assets/img/defaultUserIcon.jpg" alt="Profile" class="rounded-circle">
+        <img gravatar-email = "@User.Identity?.Name" gravatar-size="80" class="rounded-circle" alt="My Gravatar" />
         <span class="d-none d-md-block dropdown-toggle ps-2">@userManager.GetUserAsync(User).Result.FirstName[0]. @userManager.GetUserAsync(User).Result.LastName</span>
     </a>
 }
