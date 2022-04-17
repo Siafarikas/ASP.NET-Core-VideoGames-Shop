@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using VideoGamesShop.Core.Constants;
 using VideoGamesShop.Core.Contracts;
 using VideoGamesShop.Core.Models.Game;
@@ -23,9 +24,35 @@ namespace VideoGamesShop.Controllers
         }
 
         [Authorize]
-        public async Task<IActionResult> Games(int pg = 1)
+        public async Task<IActionResult> Games(string searchString, string genreId, int pg = 1)
         {
             var games = await gameService.GetGames();
+
+            var genre = await gameService.GetGenreTitleById(genreId);
+
+            var genres = gameService
+                .GetAllGenres()
+                .Result
+                .Select(g => new SelectListItem
+                {
+                    Value = g.Id,
+                    Text = g.Name
+                })
+                .ToList();
+
+            ViewBag.genres = genres;
+            ViewBag.CurrentGenreId = genreId;
+            ViewBag.CurrentSearchString = searchString;
+
+            if (!String.IsNullOrEmpty(genreId))
+            {
+                games = games.Where(g => g.Genre == genre);
+            }
+
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                games = games.Where(g => g.Title.ToUpper().Contains(searchString.ToUpper()));
+            }
 
             const int pageSize = 6;
 

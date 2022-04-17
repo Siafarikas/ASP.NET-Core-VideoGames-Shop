@@ -1,6 +1,5 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using System.Security.Claims;
 using VideoGamesShop.Core.Constants;
 using VideoGamesShop.Core.Contracts;
 using VideoGamesShop.Core.Models.Game;

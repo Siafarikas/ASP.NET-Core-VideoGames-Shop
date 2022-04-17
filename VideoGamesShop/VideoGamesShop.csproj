@@ -37,10 +37,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Views\Error\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <None Include="wwwroot\assets\jquery\jquery.js" />
     <None Include="wwwroot\assets\jquery\jquery.min.js" />
     <None Include="wwwroot\assets\jquery\jquery.min.map" />
