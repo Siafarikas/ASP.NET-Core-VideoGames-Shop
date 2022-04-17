@@ -1,4 +1,6 @@
-﻿namespace VideoGamesShop.Core.Models
+﻿using VideoGamesShop.Core.Models.Game;
+
+namespace VideoGamesShop.Core.Models
 {
     public class GameListViewModel
     {
@@ -13,5 +15,7 @@
         public string ImageUrl { get; set; }
 
         public decimal Price { get; set; }
+
+
     }
 }
