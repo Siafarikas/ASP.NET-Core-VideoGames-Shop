@@ -61,6 +61,22 @@ namespace VideoGamesShop.Controllers
             }
         }
 
+        public async Task<IActionResult> MoveToWishlist(string userId, string gameId)
+        {
+            var movedToWishlist = await cartService.MoveToWishlist(userId, gameId);
+
+            if (movedToWishlist == true)
+            {
+                TempData[MessageConstants.SuccessMessage] = "Successfully moved to wishlist!";
+                return RedirectToAction("MyWishlist", "Wishlist", new { userId = userId });
+            }
+            else
+            {
+                TempData[MessageConstants.ErrorMessage] = "Game already in wishlist!";
+                return RedirectToAction("MyCart", "Cart", new { userId = userId });
+            }
+        }
+
         public IActionResult Index()
         {
             return View();

@@ -43,6 +43,22 @@ namespace VideoGamesShop.Controllers
             return RedirectToAction("MyWishlist", "Wishlist", new { userId = userId });
         }
 
+        public async Task<IActionResult> MoveToCart(string userId, string gameId)
+        {
+            var movedToWishlist = await wishlistService.MoveToCart(userId, gameId);
+
+            if (movedToWishlist == true)
+            {
+                TempData[MessageConstants.SuccessMessage] = "Successfully moved to cart!";
+                return RedirectToAction("MyCart", "Cart", new { userId = userId });
+            }
+            else
+            {
+                TempData[MessageConstants.ErrorMessage] = "Game already in cart!";
+                return RedirectToAction("MyWishlist", "Wishlist", new { userId = userId });
+            }
+        }
+
         public IActionResult Index()
         {
             return View();

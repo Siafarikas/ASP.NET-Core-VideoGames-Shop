@@ -11,5 +11,7 @@ namespace VideoGamesShop.Core.Contracts
         Task<bool> RemoveFromCart(string productId, string user);
 
         Task<bool> BuyProductsInCart(string userId);
+
+        Task<bool> MoveToWishlist(string userId, string gameId);
     }
 }

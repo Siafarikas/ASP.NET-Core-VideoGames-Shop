@@ -94,7 +94,34 @@ namespace VideoGamesShop.Core.Services
             return true;
         }
 
+        public async Task<bool> MoveToCart(string userId, string gameId)
+        {
+            var game = await repo.All<Wish>()
+                .Where(g => g.GameId == gameId && g.UserId == userId)
+                .FirstOrDefaultAsync();
 
-       
+            if (game == null) return false;
+
+            var item = new Item()
+            {
+                UserId = userId,
+                GameId = gameId
+            };
+
+            bool gameInCart = await repo.All<Item>()
+                .ContainsAsync(item);
+
+            if (gameInCart)
+            {
+                return false;
+            }
+
+            await repo.AddAsync(item);
+            repo.Delete(game);
+            await repo.SaveChangesAsync();
+            return true;
+        }
+
+
     }
 }

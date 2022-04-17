@@ -71,7 +71,7 @@ namespace VideoGamesShop.Core.Services
                           {
                               Id = game.Id,
                               Title = game.Title,
-                              ImageUrl = game.ImageUrl,
+                              ImageUrl = game.ImageUrl
                           }).ToListAsync();
         }
 

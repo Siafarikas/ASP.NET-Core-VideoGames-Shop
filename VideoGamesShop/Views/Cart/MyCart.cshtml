@@ -79,9 +79,9 @@
                                             </div>
                                             <div class="d-flex justify-content-between align-items-center">
                                                 <div>
+                                                    <a asp-controller="Cart" asp-action="MoveToWishlist" asp-route-userId="@User.Id()" asp-route-gameId="@game.GameId" class="btn btn-primary"> <i class="bi bi-heart"></i> Move To Wishlist</a>
                                                     <a asp-controller="Store" asp-action="GameDetails" asp-route-gameId="@game.GameId" class="btn btn-secondary"><i class="bi bi-info-circle me-1"> Details</i></a>
                                                     <a asp-controller="Cart" asp-action="RemoveFromCart" asp-route-userId="@User.Id()" asp-route-gameId="@game.GameId" class="btn btn-danger"> <i class="bi bi-trash me-1"></i> Remove</a>
-                                                    <a href="#!" type="button" class="card-link-secondary small text-uppercase"><i class="fas fa-heart mr-1"></i> Move to wish list </a>
                                                 </div>
                                                 <p class="mb-0"><span><strong>$@game.Price</strong></span></p>
                                             </div>

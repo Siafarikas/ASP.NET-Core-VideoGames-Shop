@@ -63,7 +63,7 @@
                                     <p class="mb-2 text-muted text-uppercase small">@game.Genre</p>
                                     <hr>
                                     <h6 class="mb-3">@game.Price$</h6>
-                                    <a asp-controller="Store" asp-action="AddToCart" asp-route-userId="@User.Id()" asp-route-gameId="@game.GameId" class="btn btn-primary"><center><i class="bi bi-cart2 me-1"> Add to Cart</i></center></a>
+                                    <a asp-controller="Wishlist" asp-action="MoveToCart" asp-route-userId="@User.Id()" asp-route-gameId="@game.GameId" class="btn btn-primary"><center><i class="bi bi-cart2 me-1"> Move To Cart</i></center></a>
                                     <a asp-controller="Store" asp-action="GameDetails" asp-route-gameId="@game.GameId" class="btn btn-secondary"><i class="bi bi-info-circle me-1"> Details</i></a>
                                     <a asp-controller="Wishlist" asp-action="RemoveFromWishlist" asp-route-userId="@User.Id()" asp-route-gameId="@game.GameId" class="btn btn-danger"><i class="bi bi-x-circle"></i></a>
                                 </div>

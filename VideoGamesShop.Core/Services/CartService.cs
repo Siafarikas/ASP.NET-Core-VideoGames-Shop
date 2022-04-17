@@ -65,7 +65,10 @@ namespace VideoGamesShop.Core.Services
 
         public async Task<bool> RemoveFromCart(string userId, string gameId)
         {
-            var product = await repo.All<Item>().Where(p => p.GameId == gameId && p.UserId == userId).FirstOrDefaultAsync();
+            var product = await repo.All<Item>()
+                .Where(p => p.GameId == gameId && p.UserId == userId)
+                .FirstOrDefaultAsync();
+
             if (product == null)
             {
                 return false;
@@ -154,6 +157,34 @@ namespace VideoGamesShop.Core.Services
             }
 
             user.Wallet -= totalAmount;
+            await repo.SaveChangesAsync();
+            return true;
+        }
+
+        public async Task<bool> MoveToWishlist(string userId, string gameId)
+        {
+            var game = await repo.All<Item>()
+                .Where(g => g.GameId == gameId && g.UserId == userId)
+                .FirstOrDefaultAsync();
+
+            if (game == null) return false;
+
+            var wish = new Wish()
+            {
+                UserId = userId,
+                GameId = gameId
+            };
+
+            bool gameInWishlist = await repo.All<Wish>()
+                .ContainsAsync(wish);
+
+            if (gameInWishlist)
+            {
+                return false;
+            }
+
+            await repo.AddAsync(wish);
+            repo.Delete(game);
             await repo.SaveChangesAsync();
             return true;
         }
