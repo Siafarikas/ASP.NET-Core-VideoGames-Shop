@@ -31,7 +31,7 @@ namespace VideoGamesShop.Core.Models.Game
         [Display(Name = "Release Date")]
         [RegularExpression(
             @"^\d{4}\-(0[1-9]|1[012])\-(0[1-9]|[12][0-9]|3[01])$",
-            ErrorMessage = "Date must be in format \"yyyy-mm-dd\". Ex. \"2012-1-2\" is not valid, must be \"2012-01-02\".")]
+            ErrorMessage = "Date must be in format \"yyyy-mm-dd\". Incorrect: \"2012-1-2\", Correct: \"2012-01-02\".")]
         public string ReleaseDate { get; init; }
 
         [Required]
